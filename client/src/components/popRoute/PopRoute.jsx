@@ -1,4 +1,6 @@
 import React from "react"
+import { Link} from "react-router-dom"
+
 import foto from "../../images/icons/foto.png"
 import star from  "../../images/icons/star.png"
 import clock from  "../../images/icons/clock.png"
@@ -12,114 +14,47 @@ const getStars = () => {
     }
     return content;
      };
+const getRoute = () => {
+  let content = [];
+  for (let i = 0; i < 3; i++) {
+    content.push(
+      <div className="pl-8">
+        <img className="pr-8 pt-9 pb-5" src={foto} alt="foto" />
+        <div className="flex">{getStars()}</div>
+        <span className="flex font-bold text-textSeach font-jost pt-2.5 pb-1">
+          Костромские красоты
+        </span>
+        <span className="flex font-jost text-textRegion text-textRegionColor">
+          Костромская область
+        </span>
+        <div className="flex pt-3 pb-8">
+          <img src={clock} alt="clock" />
+          <span className="pl-3 text-textCard font-jost">1 день</span>
+          <img className="px-5" src={line} alt="line" />
+          <img src={LogoTrack} alt="logoTrack" />
+          <span className="pl-3 text-textCard font-jost">35 км</span>
+        </div>
+        <Link to="RoutePage">
+          <button className="focus:outline-none bg-bgBtn w-72 h-11 rounded-3xl text-white font-jost font-medium text-base">
+            Подробнее
+          </button>
+        </Link>
+      </div>
+    );
+  }
+  return content;
+};
 
 const PopRoute = () => {
     return (
-       
-        <div className="w-auto bg-primary pb-36">
-                <span className="flex justify-center pt-20 font-jost font-bold text-xl pb-11">Популярные маршруты</span>
-                <div className="flex justify-around">
-                    <div className="pl-8">
-                        <img className="pr-8 pt-9 pb-5" src={foto} alt="foto"/>
-                        <div className="flex">
-                        {getStars()}
-                        </div>
-                        <span className="flex font-bold text-textSeach font-jost pt-2.5 pb-1">Костромские красоты</span>
-                        <span className="flex font-jost text-textRegion text-textRegionColor">Костромская область</span>
-                        <div className="flex pt-3 pb-8">
-                            <img src={clock} alt="clock"/>
-                            <span className="pl-3 text-textCard font-jost" >1 день</span>
-                            <img className="px-5" src={line} alt="line"/>
-                            <img src={LogoTrack} alt="logoTrack"/>
-                            <span className="pl-3 text-textCard font-jost">35 км</span>
-                        </div>
-                        <button className="focus:outline-none bg-bgBtn w-72 h-11 rounded-3xl text-white font-jost font-medium text-base">Подробнее</button>
-                    </div>
-                    <div className="pl-8">
-                        <img className="pr-8 pt-9 pb-5" src={foto} alt="foto"/>
-                        <div className="flex">
-                        {getStars()}
-                        </div>
-                        <span className="flex font-bold text-textSeach font-jost pt-2.5 pb-1">Костромские красоты</span>
-                        <span className="flex font-jost text-textRegion text-textRegionColor">Костромская область</span>
-                        <div className="flex pt-3 pb-8">
-                            <img src={clock} alt="clock"/>
-                            <span className="pl-3 text-textCard font-jost" >1 день</span>
-                            <img className="px-5" src={line} alt="line"/>
-                            <img src={LogoTrack} alt="logoTrack"/>
-                            <span className="pl-3 text-textCard font-jost">35 км</span>
-                        </div>
-                        <button className="focus:outline-none bg-bgBtn w-72 h-11 rounded-3xl text-white font-jost font-medium text-base">Подробнее</button>
-                    </div>
-                    <div className="pl-8">
-                        <img className="pr-8 pt-9 pb-5" src={foto} alt="foto"/>
-                        <div className="flex">
-                        {getStars()}
-                        </div>
-                        <span className="flex font-bold text-textSeach font-jost pt-2.5 pb-1">Костромские красоты</span>
-                        <span className="flex font-jost text-textRegion text-textRegionColor">Костромская область</span>
-                        <div className="flex pt-3 pb-8">
-                            <img src={clock} alt="clock"/>
-                            <span className="pl-3 text-textCard font-jost" >1 день</span>
-                            <img className="px-5" src={line} alt="line"/>
-                            <img src={LogoTrack} alt="logoTrack"/>
-                            <span className="pl-3 text-textCard font-jost">35 км</span>
-                        </div>
-                        <button className="focus:outline-none bg-bgBtn w-72 h-11 rounded-3xl text-white font-jost font-medium text-base">Подробнее</button>
-                    </div>
-                </div>
-                <div className="flex justify-around">
-                    <div className="pl-8">
-                        <img className="pr-8 pt-9 pb-5" src={foto} alt="foto"/>
-                        <div className="flex">
-                        {getStars()}
-                        </div>
-                        <span className="flex font-bold text-textSeach font-jost pt-2.5 pb-1">Костромские красоты</span>
-                        <span className="flex font-jost text-textRegion text-textRegionColor">Костромская область</span>
-                        <div className="flex pt-3 pb-8">
-                            <img src={clock} alt="clock"/>
-                            <span className="pl-3 text-textCard font-jost" >1 день</span>
-                            <img className="px-5" src={line} alt="line"/>
-                            <img src={LogoTrack} alt="logoTrack"/>
-                            <span className="pl-3 text-textCard font-jost">35 км</span>
-                        </div>
-                        <button className="focus:outline-none bg-bgBtn w-72 h-11 rounded-3xl text-white font-jost font-medium text-base">Подробнее</button>
-                    </div>
-                    <div className="pl-8">
-                        <img className="pr-8 pt-9 pb-5" src={foto} alt="foto"/>
-                        <div className="flex">
-                        {getStars()}
-                        </div>
-                        <span className="flex font-bold text-textSeach font-jost pt-2.5 pb-1">Костромские красоты</span>
-                        <span className="flex font-jost text-textRegion text-textRegionColor">Костромская область</span>
-                        <div className="flex pt-3 pb-8">
-                            <img src={clock} alt="clock"/>
-                            <span className="pl-3 text-textCard font-jost" >1 день</span>
-                            <img className="px-5" src={line} alt="line"/>
-                            <img src={LogoTrack} alt="logoTrack"/>
-                            <span className="pl-3 text-textCard font-jost">35 км</span>
-                        </div>
-                        <button className="focus:outline-none bg-bgBtn w-72 h-11 rounded-3xl text-white font-jost font-medium text-base">Подробнее</button>
-                    </div>
-                    <div className="pl-8">
-                        <img className="pr-8 pt-9 pb-5" src={foto} alt="foto"/>
-                        <div className="flex">
-                        {getStars()}
-                        </div>
-                        <span className="flex font-bold text-textSeach font-jost pt-2.5 pb-1">Костромские красоты</span>
-                        <span className="flex font-jost text-textRegion text-textRegionColor">Костромская область</span>
-                        <div className="flex pt-3 pb-8">
-                            <img src={clock} alt="clock"/>
-                            <span className="pl-3 text-textCard font-jost" >1 день</span>
-                            <img className="px-5" src={line} alt="line"/>
-                            <img src={LogoTrack} alt="logoTrack"/>
-                            <span className="pl-3 text-textCard font-jost">35 км</span>
-                        </div>
-                        <button className="focus:outline-none bg-bgBtn w-72 h-11 rounded-3xl text-white font-jost font-medium text-base">Подробнее</button>
-                    </div>
-                </div>
-            </div>
-    )
+      <div className="w-auto bg-primary pb-36">
+        <span className="flex justify-center pt-20 font-jost font-bold text-xl pb-11">
+          Популярные маршруты
+        </span>
+        <div className="flex justify-around">{getRoute()}</div>
+        <div className="flex justify-around">{getRoute()}</div>
+      </div>
+    );
 }
 
 export default PopRoute
