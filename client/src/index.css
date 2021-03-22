@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Arkhip';
+  font-weight: 400;
+  font-style: normal;
+  src: url('./fonts/Arkhip.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Jost';
+  font-weight: 400;
+  font-style: normal;
+  src: url('./fonts/Jost-Regular.ttf') format('truetype');
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Arkhip', 'Jost', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
