@@ -3,10 +3,12 @@ from django.db import transaction
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, CreateView, DetailView
+from rest_framework import viewsets
 
 from authapp.decorators import traveler_only
 from socialapp.forms import FullTripCommentCreateForm
 from socialapp.models import TripComment, CommentPhoto
+from socialapp.serializers import TripCommentSerializer
 from travelapp.models import Trip
 
 
@@ -44,3 +46,15 @@ class TripCommentCreate(CreateView):
                 CommentPhoto.objects.create(image=photo, comment=form.instance)
 
         return result
+
+
+class TripCommentViewSet(viewsets.ModelViewSet):
+    """
+    Automatically provides list, create, retrieve, update and destroy actions.
+    """
+
+    queryset = TripComment.objects.filter(is_active=True, is_allowed=True)
+    serializer_class = TripCommentSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)

@@ -37,7 +37,7 @@ class RouteFilterForm(forms.Form):
 class RouteCreateForm(forms.ModelForm):
     class Meta:
         model = Route
-        fields = ['name', 'type', 'base_price', 'short_desc', 'long_desc', 'location',
+        fields = ['name', 'route_type', 'base_price', 'short_desc', 'long_desc', 'location',
                   'duration', 'length', 'complexity', 'featured_photo']
 
 

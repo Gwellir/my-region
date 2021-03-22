@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+
 import mainsite.views as main_views
 import travelapp.views as travel_views
+import socialapp.views as social_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,4 +29,13 @@ urlpatterns = [
     path('orders/', include('ordersapp.urls', namespace='orders')),
     path('auth/', include('authapp.urls', namespace='auth')),
     path('social/', include('socialapp.urls', namespace='social')),
+]
+
+router = DefaultRouter()
+router.register('routes', travel_views.RouteViewSet)
+router.register('trips', travel_views.TripViewSet)
+router.register('comments', social_views.TripCommentViewSet)
+
+urlpatterns += [
+    path('api/', include(router.urls))
 ]

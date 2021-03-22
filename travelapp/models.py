@@ -57,10 +57,10 @@ class Route(models.Model):
     objects = RouteFilterQuerySet.as_manager()
 
     name = models.CharField(verbose_name='Название маршрута', max_length=100, unique=True)
-    type = models.IntegerField(verbose_name='Тип',
-                               choices=RouteType.choices,
-                               default=RouteType.ON_FOOT,
-                               db_index=True)
+    route_type = models.IntegerField(verbose_name='Тип',
+                                     choices=RouteType.choices,
+                                     default=RouteType.ON_FOOT,
+                                     db_index=True)
     base_price = models.DecimalField(verbose_name='Ориентировочная стоимость прохождения маршрута',
                                      max_digits=8,
                                      decimal_places=2,
@@ -112,7 +112,7 @@ class Route(models.Model):
         return self.is_checked and self.is_active
 
     def __str__(self):
-        return f'Маршрут "{self.name}"\n{self.location} ({self.type}, {self.length:.1f}км, {self.duration}ч)\n' \
+        return f'Маршрут "{self.name}"\n{self.location} ({self.route_type}, {self.length:.1f}км, {self.duration}ч)\n' \
                f'Сложность: {self.complexity}'
 
 
