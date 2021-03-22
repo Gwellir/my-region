@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'ordersapp',
     'socialapp',
     'crispy_forms',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -142,3 +143,8 @@ LOGIN_URL = '/auth/login/'
 
 # activate Django-heroku
 django_heroku.settings(locals())
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10,
+}

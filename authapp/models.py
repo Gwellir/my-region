@@ -15,7 +15,7 @@ class Gender(models.IntegerChoices):
 
 class AppUser(AbstractUser):
     avatar = models.ImageField(upload_to='static/user_pics', blank=True)
-    date_of_birth = models.DateField(verbose_name='Дата рождения', default=now)
+    date_of_birth = models.DateField(verbose_name='Дата рождения', default=now())
     activation_key = models.CharField(verbose_name='Ключ активации', max_length=128, blank=True)
     activation_key_expiry = models.DateTimeField(
         verbose_name='Крайний срок текущей активации',
@@ -63,8 +63,7 @@ class Instructor(models.Model):
     user = models.OneToOneField(AppUser, unique=True, db_index=True, null=True, on_delete=models.CASCADE)
     about = models.TextField(verbose_name='О себе', blank=True)
     home_region = models.CharField(verbose_name='Место проживания', max_length=100, blank=True)
-    routes_run = models.IntegerField(verbose_name='Пройдено маршрутов', default=0)
-    is_active = models.BooleanField(verbose_name='Инструктор доступен для маршрута', default=True)
+    trips_run = models.IntegerField(verbose_name='Пройдено маршрутов', default=0)
     # subscribers = models.ManyToManyField(Traveler, verbose_name='Подписчики', blank=True, related_name='subscribed_to')
 
     def __str__(self):

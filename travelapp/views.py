@@ -3,9 +3,13 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView
+from rest_framework import viewsets
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from travelapp.models import Route, Trip, RoutePhoto
 from .forms import RouteFilterForm, FullRouteCreateForm
+from .serializers import RouteSerializer, TripSerializer
 
 
 class RouteList(ListView):
@@ -71,3 +75,34 @@ class RouteCreateView(CreateView):
 
 class TripDetail(DetailView):
     model = Trip
+
+
+class RouteViewSet(viewsets.ModelViewSet):
+    """
+    Automatically provides list, create, retrieve, update and destroy actions.
+    """
+
+    queryset = Route.objects.filter(is_active=True)
+    serializer_class = RouteSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(instructor=self.request.user.instructor)
+
+
+class TripViewSet(viewsets.ModelViewSet):
+    """
+    Automatically provides list, create, retrieve, update and destroy actions.
+    """
+
+    queryset = Trip.objects.all()
+    serializer_class = TripSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(instructor=self.request.user.instructor)
+
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'routes': reverse('route-list', request=request, format=format),
+    })

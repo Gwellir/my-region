@@ -9,6 +9,7 @@ class Comment(models.Model):
     author = models.ForeignKey('authapp.AppUser', verbose_name='Автор', on_delete=models.CASCADE)
     content = models.TextField(verbose_name='Текст')
     added_at = models.DateTimeField(verbose_name='Время добавления', db_index=True, auto_now_add=True)
+    last_edit = models.DateTimeField(verbose_name='Время изменения', auto_now_add=True)
     is_allowed = models.BooleanField(verbose_name='Прошёл модерацию', db_index=True, default=True)
     is_active = models.BooleanField(verbose_name='Не удалён', db_index=True, default=True)
 
