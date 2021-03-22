@@ -1,2 +1,16 @@
-# my-edge
-Test version of a traveling assistant app.
+# Мой Край
+Приложение для подбора маршрутов походов в регионах России.
+
+## Развёртывание проекта и настройка окружения
+
+Рекомендуется использовать версию python от 3.8.
+
+Шаги:
+1. Выполнить команду `pip install virtualenv` для установки утилиты для создания виртуальных окружений.
+2. Выполнить `virtualenv venv/` для создания виртуального окружения проекта. 
+3. Инициировать виртуальное окружение: `venv\Scripts\activate.bat`
+3. _(для Linux)_ `source venv/bin/activate`
+4. Установить требуемые пакеты: `pip install -r requirements.txt`
+5. Выполнить базовые миграции БД: `python manage.py migrate`
+6. Заполнить базу стартовыми данными: `python manage.py loaddata fixtures/fixture2.json`
+7. Теперь можно запустить сервер разработки: `python manage.py runserver [address:port]` (по умолчанию сервер запустится на адресе 127.0.0.1 на 8000 порту)
