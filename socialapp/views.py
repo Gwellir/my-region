@@ -6,7 +6,7 @@ from django.views.generic import ListView, CreateView, DetailView
 from rest_framework import viewsets
 
 from authapp.decorators import traveler_only
-from socialapp.forms import FullTripCommentCreateForm
+from socialapp.forms import TripCommentCreateForm
 from socialapp.models import TripComment, CommentPhoto
 from socialapp.serializers import TripCommentSerializer
 from travelapp.models import Trip
@@ -16,7 +16,7 @@ from travelapp.models import Trip
 @method_decorator([login_required, traveler_only], name='dispatch')
 class TripCommentCreate(CreateView):
     model = TripComment
-    form_class = FullTripCommentCreateForm
+    form_class = TripCommentCreateForm
     success_url = reverse_lazy('travelapp:route_list')
 
     def get_context_data(self, **kwargs):

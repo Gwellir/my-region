@@ -20,6 +20,9 @@ class RouteLevel(models.IntegerChoices):
 
 # todo this is actually bad
 class TripFilterQuerySet(models.QuerySet):
+    """
+    Временная реализация функционала фильтрации походов для первого MVP.
+    """
     def get_filtered(self, **kwargs):
         # todo: fix double query
         qs = self.filter(
@@ -39,6 +42,10 @@ class TripFilterQuerySet(models.QuerySet):
 
 
 class RouteFilterQuerySet(models.QuerySet):
+    """
+    Временная реализация фильтра маршрутов для первого MVP
+    """
+
     def search(self, *args, **kwargs):
         qs = self.filter(is_active=True, is_checked=True)
         if kwargs.get('region', ''):
@@ -54,6 +61,10 @@ class RouteFilterQuerySet(models.QuerySet):
 
 
 class Route(models.Model):
+    """
+    Модель маршрута.
+    """
+
     objects = RouteFilterQuerySet.as_manager()
 
     name = models.CharField(verbose_name='Название маршрута', max_length=100, unique=True)
@@ -66,6 +77,7 @@ class Route(models.Model):
                                      decimal_places=2,
                                      default=0)
     short_desc = models.TextField(verbose_name='Краткое описание')
+    # todo implement richtextfield
     long_desc = models.TextField(verbose_name='Полное описание')
     # location = models.CharField(verbose_name='Местоположение', max_length=200, db_index=True)
     location = models.ForeignKey('travelapp.Region',
@@ -80,6 +92,7 @@ class Route(models.Model):
                                      default=RouteLevel.EASY,
                                      db_index=True)
     added_at = models.DateTimeField(verbose_name='Время создания маршрута', auto_now_add=True)
+    # todo implement proper working with photos, including thumbnailing
     featured_photo = models.ImageField(upload_to='static/img', verbose_name='Фото для оформления маршрута', blank=True)
     is_active = models.BooleanField(verbose_name='Маршрут доступен для проведения', default=True, db_index=True, blank=False)
     is_checked = models.BooleanField(verbose_name='Модерация проведена', default=False, db_index=True, blank=False)
@@ -117,12 +130,18 @@ class Route(models.Model):
 
 
 class RoutePhoto(models.Model):
+    """
+    Модель сопроводительной фотографии маршрута.
+    """
     image = models.ImageField(upload_to='static/route_photos')
     added_at = models.DateTimeField(verbose_name='Время добавления', auto_now_add=True)
     route = models.ForeignKey(Route, related_name='photos', on_delete=models.CASCADE)
 
 
 class Trip(models.Model):
+    """
+    Модель похода, объявленного по связанному маршруту.
+    """
     objects = TripFilterQuerySet.as_manager()
     route = models.ForeignKey('Route',
                               related_name='trips',
@@ -143,13 +162,17 @@ class Trip(models.Model):
 
     @property
     def subbed(self):
+        """
+        Возвращает полное количество участников.
+        """
+
         return self.kids + self.adults
-    #
-    # @property
-    # def ends_at(self):
-    #     return self.starts_at + timedelta(days=self.route.duration)
 
     def get_cost(self):
+        """
+        Возвращает стоимость участия в походе (за одно место) с учётом опций
+        """
+
         options_cost = 0
         for option in self.options.all():
             options_cost += option.price
@@ -168,6 +191,10 @@ class Options(models.IntegerChoices):
 
 
 class TripOptionAvailable(models.Model):
+    """
+    Модель описывает опции, которые организатор похода объявил доступными для этого похода.
+    """
+
     trip = models.ManyToManyField('Trip',
                                   related_name='options',)
     name = models.IntegerField(verbose_name='Наименование опции',

@@ -6,6 +6,9 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Comment(models.Model):
+    """
+    Модель абстрактного комментария.
+    """
     author = models.ForeignKey('authapp.AppUser', verbose_name='Автор', on_delete=models.CASCADE)
     content = models.TextField(verbose_name='Текст')
     added_at = models.DateTimeField(verbose_name='Время добавления', db_index=True, auto_now_add=True)
@@ -15,6 +18,9 @@ class Comment(models.Model):
 
 
 class TripScore(models.IntegerChoices):
+    """
+    Перечисление оценок походов.
+    """
     TERRIBLE = 1, _('Ужасно')
     BAD = 2, _('Плохо')
     AVERAGE = 3, _('Средне')
@@ -23,6 +29,9 @@ class TripScore(models.IntegerChoices):
 
 
 class TripComment(Comment):
+    """
+    Модель комментария к походу.
+    """
     trip = models.ForeignKey('travelapp.Trip', verbose_name='Поход', related_name='comments', on_delete=models.CASCADE)
     # trip specific fields
     score = models.IntegerField(verbose_name='Оценка похода',
@@ -33,6 +42,9 @@ class TripComment(Comment):
 
 
 class CommentPhoto(models.Model):
+    """
+    Модель для хранения пользовательских фотографий похода.
+    """
     comment = models.ForeignKey(Comment, verbose_name='Комментарий', related_name='photos', on_delete=models.CASCADE)
     added_at = models.DateTimeField(verbose_name='Добавлено', auto_now_add=True)
     image = models.ImageField(upload_to='static/comment_media')

@@ -4,6 +4,10 @@ from django.shortcuts import render
 
 
 def main(request):
+    """
+    Филлер главной страницы.
+    """
+
     title = 'Travel Freely!'
 
     content = {
