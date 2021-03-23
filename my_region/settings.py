@@ -134,6 +134,7 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+# todo scrap after switching to API
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 AUTH_USER_MODEL = 'authapp.AppUser'
@@ -144,6 +145,7 @@ LOGIN_URL = '/auth/login/'
 # activate Django-heroku
 django_heroku.settings(locals())
 
+# DRF
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10,

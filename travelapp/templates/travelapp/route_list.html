@@ -1,26 +1,26 @@
 {% extends 'mainsite/base.html' %}
 {% block content %}
 <main role="main" class="container">
-  <div class="row">
-    <div class="col-md-12 blog-main">
-      <h3 class="pb-4 mb-4 font-italic border-bottom">Список маршрутов</h3>
-        {% include 'travelapp/includes/inc-filter-form.html' %}
-        <div class="row">
-        {% for route in object_list %}
-            {% if route.is_usable %}
-              <div class="blog-post col-4 p-1">
-                <div class="bg-light p-3">
-                <div class="route-image p-4">
-                  <img src="/{{route.featured_photo}}" alt="" class="img-fluid img-thumbnail">
-                </div>
-                <h2 class="blog-post-title text-center"><a href="{% url 'travelapp:route_read' route.pk %}">{{ route.name }}</a></h2>
-                <p class="blog-post-meta">Инструктор: <a href="#">{{ route.instructor.user.get_full_name }}</a></p>
+    <div class="row">
+        <div class="col-md-12 blog-main">
+            <h3 class="pb-4 mb-4 font-italic border-bottom">Список маршрутов</h3>
+            {% include 'travelapp/includes/inc-filter-form.html' %}
+            <div class="row">
+                {% for route in object_list %}
+                {% if route.is_usable %}
+                <div class="blog-post col-4 p-1">
+                    <div class="bg-light p-3">
+                        <div class="route-image p-4">
+                            <img src="/{{route.featured_photo}}" alt="" class="img-fluid img-thumbnail">
+                        </div>
+                        <h2 class="blog-post-title text-center"><a href="{% url 'travelapp:route_read' route.pk %}">{{ route.name }}</a></h2>
+                        <p class="blog-post-meta">Инструктор: <a href="#">{{ route.instructor.user.get_full_name }}</a></p>
 
-                <p>Место: {{ route.location.name }}</p>
-                <hr>
-                <p>{{ route.short_desc }}</p>
-                <hr>
-                <p>Тип: {{ route.get_type_display }}, cложность: <span class="p-0 btn
+                        <p>Место: {{ route.location.name }}</p>
+                        <hr>
+                        <p>{{ route.short_desc }}</p>
+                        <hr>
+                        <p>Тип: {{ route.get_type_display }}, cложность: <span class="p-0 btn
                   {% if route.complexity == 1 %}
                     btn-success
                   {% elif route.complexity == 2 %}
@@ -29,20 +29,20 @@
                     btn-danger
                   {% endif %}
                   ">{{ route.get_complexity_display }}</span></p>
-                <p>Длина: {{ route.length }}км (займёт примерно {{ route.duration }} дней)</p>
-              </div>
-              </div><!-- /.blog-post -->
-            {% endif %}
-        {% endfor %}
-        </div>
+                        <p>Длина: {{ route.length }}км (займёт примерно {{ route.duration }} дней)</p>
+                    </div>
+                </div><!-- /.blog-post -->
+                {% endif %}
+                {% endfor %}
+            </div>
 
-<!--      <nav class="blog-pagination">-->
-<!--        <a class="btn btn-outline-primary" href="#">Older</a>-->
-<!--        <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>-->
-<!--      </nav>-->
+            <!--      <nav class="blog-pagination">-->
+            <!--        <a class="btn btn-outline-primary" href="#">Older</a>-->
+            <!--        <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>-->
+            <!--      </nav>-->
 
-    </div><!-- /.blog-main -->
+        </div><!-- /.blog-main -->
 
-  </div><!-- /.row -->
+    </div><!-- /.row -->
 </main>
 {% endblock %}

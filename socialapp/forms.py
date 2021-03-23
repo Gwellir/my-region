@@ -4,13 +4,11 @@ from socialapp.models import TripComment
 
 
 class TripCommentCreateForm(forms.ModelForm):
-    class Meta:
-        model = TripComment
-        fields = ['trip', 'content', 'score']
-
-
-class FullTripCommentCreateForm(TripCommentCreateForm):
+    """
+    Форма создания комментария к походу по маршруту.
+    """
     photos = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
 
-    class Meta(TripCommentCreateForm.Meta):
-        fields = TripCommentCreateForm.Meta.fields + ['photos', ]
+    class Meta:
+        model = TripComment
+        fields = ['trip', 'content', 'score', 'photos']

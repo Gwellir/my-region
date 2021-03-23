@@ -1,3 +1,5 @@
+# todo scrap after switching to API
+
 from django.contrib import auth
 from django.contrib.auth import login
 from django.http import HttpResponseRedirect
@@ -10,6 +12,10 @@ from authapp.models import AppUser
 
 
 def login_view(request):
+    """
+    Страница логина пользователя.
+    """
+
     title = 'login'
 
     login_form = UserLoginForm(data=request.POST or None)
@@ -37,15 +43,25 @@ def login_view(request):
 
 
 def logout(request):
+    """
+    Страница логаута пользователя.
+    """
+
     auth.logout(request)
     return HttpResponseRedirect(reverse('main'))
 
 
 class RegisterView(TemplateView):
+    """
+    Страница перехода для регистрации разных типов пользователей.
+    """
     template_name = 'authapp/register.html'
 
 
 class TravelerSignupView(CreateView):
+    """
+    Страница регистрации путешественника.
+    """
     model = AppUser
     form_class = SignupForm
     template_name = 'authapp/signup.html'
@@ -61,6 +77,9 @@ class TravelerSignupView(CreateView):
 
 
 class InstructorSignupView(CreateView):
+    """
+    Страница логина инструктора.
+    """
     model = AppUser
     form_class = SignupForm
     template_name = 'authapp/signup.html'

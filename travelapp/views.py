@@ -1,6 +1,4 @@
 from django.db import transaction
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView
 from rest_framework import viewsets
@@ -8,7 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from travelapp.models import Route, Trip, RoutePhoto
-from .forms import RouteFilterForm, FullRouteCreateForm
+from .forms import RouteFilterForm, RouteCreateForm
 from .serializers import RouteSerializer, TripSerializer
 
 
@@ -58,7 +56,7 @@ class RouteDetail(DetailView):
 
 class RouteCreateView(CreateView):
     model = Route
-    form_class = FullRouteCreateForm
+    form_class = RouteCreateForm
     success_url = reverse_lazy('travelapp:route_list')
 
     def form_valid(self, form):
