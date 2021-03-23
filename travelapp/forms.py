@@ -46,4 +46,4 @@ class RouteCreateForm(forms.ModelForm):
     class Meta:
         model = Route
         fields = ['name', 'route_type', 'base_price', 'short_desc', 'long_desc', 'location',
-                  'duration', 'length', 'complexity', 'featured_photo', 'photos']
+                  'duration', 'length', 'complexity', 'featured_photo', 'photos', 'gpx_track']

@@ -94,6 +94,8 @@ class Route(models.Model):
     added_at = models.DateTimeField(verbose_name='Время создания маршрута', auto_now_add=True)
     # todo implement proper working with photos, including thumbnailing
     featured_photo = models.ImageField(upload_to='static/img', verbose_name='Фото для оформления маршрута', blank=True)
+    # todo supposedly add a model for additional info about the route...
+    gpx_track = models.FileField(upload_to='static/tracks', verbose_name='Трек маршрута в формате GPX', blank=True)
     is_active = models.BooleanField(verbose_name='Маршрут доступен для проведения', default=True, db_index=True, blank=False)
     is_checked = models.BooleanField(verbose_name='Модерация проведена', default=False, db_index=True, blank=False)
     instructor = models.ForeignKey('authapp.Instructor',

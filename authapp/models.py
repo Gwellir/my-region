@@ -17,17 +17,21 @@ class Gender(models.IntegerChoices):
     MALE = 2, _('Мужской')
 
 
+def get_expiry_datetime():
+    return now() + timedelta(hours=24)
+
+
 class AppUser(AbstractUser):
     """
     Модель пользователя Django.
     """
 
     avatar = models.ImageField(upload_to='static/user_pics', blank=True)
-    date_of_birth = models.DateField(verbose_name='Дата рождения', default=now())
+    date_of_birth = models.DateField(verbose_name='Дата рождения', default=now)
     activation_key = models.CharField(verbose_name='Ключ активации', max_length=128, blank=True)
     activation_key_expiry = models.DateTimeField(
         verbose_name='Крайний срок текущей активации',
-        default=now() + timedelta(hours=24),
+        default=get_expiry_datetime,
     )
     gender = models.IntegerField(verbose_name='Пол', blank=False, db_index=True, choices=Gender.choices)
     phone = models.CharField(verbose_name='Номер телефона', blank=True, max_length=20)
