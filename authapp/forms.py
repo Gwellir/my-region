@@ -1,3 +1,6 @@
+import hashlib
+from random import random
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.db import transaction
@@ -57,6 +60,9 @@ class SignupForm(UserCreationForm):
             user.is_instructor = True
             profile_maker = Instructor
 
+        user.is_active = False
+        salt = hashlib.sha1(str(random()).encode('utf8')).hexdigest()[:6]
+        user.activation_key = hashlib.sha1((user.email + salt).encode('utf8')).hexdigest()
         user.save()
         profile = profile_maker.objects.create(user=user)
 

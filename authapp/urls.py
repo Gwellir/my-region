@@ -12,5 +12,5 @@ urlpatterns = [
     path('signup/', authapp.RegisterView.as_view(), name='register'),
     path('signup/traveler/', authapp.TravelerSignupView.as_view(), name='signup_traveler'),
     path('signup/instructor/', authapp.InstructorSignupView.as_view(), name='signup_instructor'),
-    # path('verify/<str:email>/<str:activation_key>/', authapp.verify, name='verify'),
+    path('verify/<str:email>/<str:activation_key>/', authapp.verify, name='verify'),
 ]

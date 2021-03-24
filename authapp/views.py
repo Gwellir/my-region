@@ -7,6 +7,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, TemplateView
 
+from django.core.mail import send_mail
+from django.conf import settings
+
 from authapp.forms import SignupForm, UserLoginForm
 from authapp.models import AppUser
 
@@ -58,37 +61,73 @@ class RegisterView(TemplateView):
     template_name = 'authapp/register.html'
 
 
-class TravelerSignupView(CreateView):
+class SignupView(CreateView):
     """
-    Страница регистрации путешественника.
+    Страница регистрации.
     """
     model = AppUser
     form_class = SignupForm
     template_name = 'authapp/signup.html'
 
+    def form_valid(self, form):
+        user: AppUser = form.save()
+        if send_verify_mail(user):
+            print('Sent registration confirmation message')
+            return HttpResponseRedirect(reverse('auth:login'))
+        else:
+            print('Confirmation message not sent, encountered an error')
+            return HttpResponseRedirect(reverse('auth:login'))
+        # login(self.request, user)
+        # return redirect('main')
+
+
+class TravelerSignupView(SignupView):
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'traveler'
         return super().get_context_data(**kwargs)
 
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect('main')
 
-
-class InstructorSignupView(CreateView):
+class InstructorSignupView(SignupView):
     """
-    Страница логина инструктора.
+    Страница регистрации инструктора.
     """
-    model = AppUser
-    form_class = SignupForm
-    template_name = 'authapp/signup.html'
-
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'instructor'
         return super().get_context_data(**kwargs)
 
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect('main')
+
+def send_verify_mail(user):
+    verify_link = reverse(
+        'auth:verify',
+        args=[user.email, user.activation_key],
+    )
+
+    title = f'Подтверждение аккаунта Мой Край для: {user.username}'
+    message = f'Чтобы завершить активацию аккаунта {user.username} на сервисе "Мой Край",'\
+              f'перейдите по этой ссылке:\n{settings.DOMAIN_NAME}{verify_link}'
+
+    print(f'from: {settings.EMAIL_HOST_USER}, to: {user.email}')
+    # todo this is VERY slow, either implement sending through postfix or try anymail
+    return send_mail(
+        title,
+        message,
+        settings.EMAIL_HOST_USER,
+        [user.email],
+        fail_silently=False,
+    )
+
+
+def verify(request, email, activation_key):
+    try:
+        user: AppUser = AppUser.objects.filter(email=email).first()
+        if user.activation_key == activation_key and not user.is_key_expired():
+            user.is_active = True
+            user.save()
+            auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            return render(request, 'authapp/verification.html')
+        else:
+            print(f'error activating user: {user}')
+            return render(request, 'authapp/verification.html')
+    except Exception as e:
+        print(f'error activating user : {e.args}')
+        return HttpResponseRedirect(reverse('main'))
