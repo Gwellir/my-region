@@ -155,7 +155,7 @@ REST_FRAMEWORK = {
 }
 
 # Email
-DOMAIN_NAME = 'http://127.0.0.1:8000'
+DOMAIN_NAME = os.getenv('DOMAIN_NAME')
 # todo this is unsafe as it requires LESS SECURE ACCESS to google account
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
