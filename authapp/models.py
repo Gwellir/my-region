@@ -49,6 +49,20 @@ class AppUser(AbstractUser):
         else:
             return True
 
+    @property
+    def role_display(self):
+        if self.is_superuser or self.is_staff:
+            return 'Админ'
+        elif self.is_instructor:
+            return 'Гид'
+        elif self.is_traveler:
+            return 'Походник'
+        else:
+            return 'Н/Д'
+
+    def __str__(self):
+        return f'[{self.get_gender_display()[:1]}] {self.username} ({self.role_display})'
+
 
 class Traveler(models.Model):
     """
