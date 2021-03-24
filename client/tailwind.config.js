@@ -10,7 +10,8 @@ module.exports = {
       backgroundColor: (theme) => ({
         primary: "#ffffff",
         secondary: "#E7EEE7",
-        bgBtn: "#2D6501"
+        bgBtn: "#2D6501",
+        btmReg: "#9BACA0"
       }),
       colors: {
         textBlack: "#1F1C45",
@@ -27,7 +28,9 @@ module.exports = {
         dateReviewesSize: ['19px', '20px'],
         pReviews: ['20px', '21px'],
         addressSize:['20px', '29px'],
-        telSize: ['19px', '27px']
+        telSize: ['19px', '27px'],
+        registerText: ['24px', '35px'],
+        titleRegister: ['18px', '26px']
       },
       fontFamily: {
         sans: ['arkhip'],

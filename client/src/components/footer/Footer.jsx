@@ -32,7 +32,7 @@ const Footer = () => {
                 <span className="font-jost text-addressSize font-medium pb-2">Организациям</span>
                 <span className="font-jost text-addressSize pb-2">ООПТ</span>
                 <span className="font-jost text-addressSize pb-2">Тарифы</span>
-                <span className="font-jost text-addressSize pb-2">Тарифы</span>
+                <span className="font-jost text-addressSize pb-2">Сотрудничество</span>
             </div>
             <div className="flex flex-col mt-3.5">
                 <span className="font-jost text-addressSize font-medium pb-2">Обратная связь</span>
