@@ -83,21 +83,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'my_region.wsgi.application'
 
-# Auth backends
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'social_core.backends.vk.VKOAuth2',
-)
-
-SOCIAL_AUTH_VK_OAUTH2_KEY = os.getenv('VK_OAUTH2_KEY')
-SOCIAL_AUTH_VK_OAUTH2_SECRET = os.getenv('VK_OAUTH2_SECRET')
-
-# Namespace for cross-auth urls functionality
-SOCIAL_AUTH_URL_NAMESPACE = 'oauth'
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
