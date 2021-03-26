@@ -31,6 +31,10 @@ urlpatterns = [
     path('social/', include('socialapp.urls', namespace='social')),
 ]
 
+urlpatterns += [
+    path('djrichtextfield/', include('djrichtextfield.urls')),
+]
+
 router = DefaultRouter()
 router.register('routes', travel_views.RouteViewSet)
 router.register('trips', travel_views.TripViewSet)

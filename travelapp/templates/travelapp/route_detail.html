@@ -19,7 +19,7 @@
                     <hr>
                     <p>{{ object.short_desc }}</p>
                     <hr>
-                    <p>Тип: {{ object.get_type_display }}, cложность: <span class="p-0 btn
+                    <p>Тип: {{ object.get_route_type_display }}, cложность: <span class="p-0 btn
                       {% if object.complexity == 1 %}
                         btn-success
                       {% elif object.complexity == 2 %}
@@ -31,7 +31,7 @@
                     <p>Длина: {{ object.length }}км, продолжительность (в днях): {{ object.duration }}</p>
                 </div>
                 </div>
-                <p class="">{{ object.long_desc}}</p>
+                <p class="">{{ object.long_desc|safe }}</p>
                 <div class="row">
                 {% for photo in object.photos.all %}
                   <div class="col-md-3">

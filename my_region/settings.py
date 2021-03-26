@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'ordersapp',
     'socialapp',
     'crispy_forms',
-    'rest_framework'
+    'rest_framework',
+    'djrichtextfield',
 ]
 
 MIDDLEWARE = [
@@ -82,6 +83,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'my_region.wsgi.application'
 
+# Auth backends
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.vk.VKOAuth2',
+)
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = os.getenv('VK_OAUTH2_KEY')
+SOCIAL_AUTH_VK_OAUTH2_SECRET = os.getenv('VK_OAUTH2_SECRET')
+
+# Namespace for cross-auth urls functionality
+SOCIAL_AUTH_URL_NAMESPACE = 'oauth'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -165,3 +177,19 @@ EMAIL_HOST_USER = os.getenv('EMAIL_USERNAME')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# Django RichTextField
+DJRICHTEXTFIELD_CONFIG = {
+    'js': ['//cdn.ckeditor.com/4.14.0/standard/ckeditor.js'],
+    'init_template': 'djrichtextfield/init/ckeditor.js',
+    'settings': {  # CKEditor
+        'toolbar': [
+            {'items': ['Format', '-', 'Bold', 'Italic', '-',
+                       'RemoveFormat']},
+            {'items': ['Link', 'Unlink', 'Table', 'BulletedList', 'NumberedList']},
+            {'items': ['Source']}
+        ],
+        'format_tags': 'p;h1;h2;h3',
+        'width': 700
+    }
+}

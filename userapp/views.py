@@ -33,3 +33,6 @@ class TravelerProfileView(DetailView):
 class InstructorDetailView(DetailView):
     model = Instructor
     template_name = 'userapp/instructor_detail.html'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(self.model, pk=self.request.user.instructor.pk)

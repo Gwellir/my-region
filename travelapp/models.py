@@ -3,6 +3,8 @@ from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from djmoney.models.fields import MoneyField
 # from authapp.models import Instructor
+from djrichtextfield.models import RichTextField
+
 from socialapp.models import TripComment
 
 
@@ -10,12 +12,17 @@ class RouteType(models.IntegerChoices):
     ON_FOOT = 1, _('Пеший')
     ON_BIKE = 2, _('Велосипедный')
     ON_BOAT = 3, _('Водный')
+    ON_CAR = 4, _('Автомобильный')
+    ON_SKI = 5, _('Лыжный')
+    MOUNTAIN = 6, _('Горный')
 
 
 class RouteLevel(models.IntegerChoices):
     EASY = 1, _('Простой')
-    ADVANCED = 2, _('Продвинутый')
-    HARD = 3, _('Сложный')
+    NORMAL = 2, _('Обычный')
+    ADVANCED = 3, _('Продвинутый')
+    HARD = 4, _('Сложный')
+    EXTREME = 5, _('Экстремальный')
 
 
 # todo this is actually bad
@@ -78,7 +85,8 @@ class Route(models.Model):
                                      default=0)
     short_desc = models.TextField(verbose_name='Краткое описание')
     # todo implement richtextfield
-    long_desc = models.TextField(verbose_name='Полное описание')
+    # long_desc = models.TextField(verbose_name='Полное описание')
+    long_desc = RichTextField(verbose_name='Полное описание')
     # location = models.CharField(verbose_name='Местоположение', max_length=200, db_index=True)
     location = models.ForeignKey('travelapp.Region',
                                  verbose_name='Местоположение',
