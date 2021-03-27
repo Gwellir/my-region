@@ -31,7 +31,7 @@
                     <p>Длина: {{ object.length }}км, продолжительность (в днях): {{ object.duration }}</p>
                 </div>
                 </div>
-                <p class="">{{ object.long_desc|safe }}</p>
+                <div class="mx-4">{{ object.long_desc|safe }}</div>
                 <div class="row">
                 {% for photo in object.photos.all %}
                   <div class="col-md-3">

@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.timezone import now
@@ -21,10 +22,18 @@ def get_expiry_datetime():
     return now() + timedelta(hours=24)
 
 
+def email_is_lowercase(mail):
+    if not isinstance(mail, str) or mail != mail.lower():
+        raise ValidationError(_(f'Укажите адрес почты в нижнем регистре!'))
+
+
 class AppUser(AbstractUser):
     """
     Модель пользователя Django.
     """
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name']
 
     avatar = models.ImageField(upload_to='static/user_pics', blank=True)
     date_of_birth = models.DateField(verbose_name='Дата рождения', default=now)
@@ -35,7 +44,9 @@ class AppUser(AbstractUser):
     )
     gender = models.IntegerField(verbose_name='Пол', blank=False, db_index=True, choices=Gender.choices)
     phone = models.CharField(verbose_name='Номер телефона', blank=True, max_length=20)
-    email = models.EmailField(verbose_name='Адрес Email', unique=True)
+    email = models.EmailField(verbose_name='Адрес Email',
+                              unique=True,
+                              validators=[email_is_lowercase])
     is_instructor = models.BooleanField(default=False, null=False, db_index=True)
     is_traveler = models.BooleanField(default=False, null=False, db_index=True)
     # phone_number

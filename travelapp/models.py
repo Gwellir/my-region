@@ -154,6 +154,7 @@ class Trip(models.Model):
     """
     objects = TripFilterQuerySet.as_manager()
     route = models.ForeignKey('Route',
+                              verbose_name='Маршрут',
                               related_name='trips',
                               on_delete=models.CASCADE)
     price = models.DecimalField(verbose_name='Стоимость прохождения маршрута',
@@ -163,6 +164,7 @@ class Trip(models.Model):
     starts_at = models.DateTimeField(verbose_name='Время начала похода', blank=False, db_index=True)
     ends_at = models.DateTimeField(verbose_name='Время окончания похода', blank=False, db_index=True)
     instructor = models.ForeignKey('authapp.Instructor',
+                                   verbose_name='Гид',
                                    related_name='trips',
                                    on_delete=models.CASCADE)
     kids = models.IntegerField(verbose_name='Детей в группе', default=0)

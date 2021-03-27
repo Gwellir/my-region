@@ -3,9 +3,12 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView
+from rest_framework import viewsets
 
 from authapp.decorators import traveler_only
 from ordersapp.models import Order, OrderItem
+from ordersapp.permissions import OwnsOrIsTravelerOrReadOnly
+from ordersapp.serializers import OrderSerializer
 from travelapp.models import Trip, TripOptionAvailable
 
 
@@ -58,3 +61,29 @@ class OrderCreate(CreateView):
         form_obj.save()
 
         return super(OrderCreate, self).form_valid(form)
+
+
+class OrderViewSet(viewsets.ModelViewSet):
+    """
+    Реализует СRUD для объектов брони (OrderItem)
+    """
+
+    queryset = OrderItem.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = [OwnsOrIsTravelerOrReadOnly]
+
+    def get_queryset(self):
+        """
+        Возвращает только релевантные элементы из списка заказов
+        :return:
+        """
+        user = self.request.user
+        if user.is_traveler:
+            return OrderItem.objects.filter(traveler=user.traveler)
+        elif user.is_instructor:
+            return OrderItem.objects.filter(trip__instructor=user.instructor)
+        else:
+            return self.queryset
+
+    def perform_create(self, serializer):
+        serializer.save(traveler=self.request.user.traveler)

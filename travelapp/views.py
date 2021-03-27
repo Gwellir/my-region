@@ -1,13 +1,15 @@
 from django.db import transaction
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from travelapp.models import Route, Trip, RoutePhoto
+from .filters import TripFilter
 from .forms import RouteFilterForm, RouteCreateForm
 from .serializers import RouteSerializer, TripSerializer
+from .permissions import OwnsOrIsInstructorOrReadOnly
 
 
 class RouteList(ListView):
@@ -77,11 +79,12 @@ class TripDetail(DetailView):
 
 class RouteViewSet(viewsets.ModelViewSet):
     """
-    Automatically provides list, create, retrieve, update and destroy actions.
+    Реализует СRUD для объектов маршрутов (Route)
     """
 
     queryset = Route.objects.filter(is_active=True)
     serializer_class = RouteSerializer
+    permission_classes = [OwnsOrIsInstructorOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(instructor=self.request.user.instructor)
@@ -89,11 +92,20 @@ class RouteViewSet(viewsets.ModelViewSet):
 
 class TripViewSet(viewsets.ModelViewSet):
     """
-    Automatically provides list, create, retrieve, update and destroy actions.
+    Реализует СRUD для объектов походов (Trip)
     """
 
     queryset = Trip.objects.all()
     serializer_class = TripSerializer
+    permission_classes = [OwnsOrIsInstructorOrReadOnly]
+    filterset_class = TripFilter
+
+    # def get_permissions(self):
+    #     if self.action in ['create', 'update', 'partial_update', 'destroy']:
+    #         permission_classes = [IsInstructorOrReadOnly]
+    #     else:
+    #         permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    #     return [permission() for permission in permission_classes]
 
     def perform_create(self, serializer):
         serializer.save(instructor=self.request.user.instructor)

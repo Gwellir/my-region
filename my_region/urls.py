@@ -20,6 +20,7 @@ from rest_framework.routers import DefaultRouter
 import mainsite.views as main_views
 import travelapp.views as travel_views
 import socialapp.views as social_views
+import ordersapp.views as order_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,6 +40,7 @@ router = DefaultRouter()
 router.register('routes', travel_views.RouteViewSet)
 router.register('trips', travel_views.TripViewSet)
 router.register('comments', social_views.TripCommentViewSet)
+router.register('orders', order_views.OrderViewSet)
 
 urlpatterns += [
     path('api/', include(router.urls))
