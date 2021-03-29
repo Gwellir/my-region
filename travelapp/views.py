@@ -82,7 +82,7 @@ class RouteViewSet(viewsets.ModelViewSet):
     Реализует СRUD для объектов маршрутов (Route)
     """
 
-    queryset = Route.objects.filter(is_active=True)
+    queryset = Route.objects.filter(is_active=True, is_checked=True)
     serializer_class = RouteSerializer
     permission_classes = [OwnsOrIsInstructorOrReadOnly]
 

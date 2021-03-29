@@ -2,7 +2,7 @@
 
 {% block content %}
 
-  {% if user %}
+  {% if user.username %}
     <h4>Пользователь {{user.username}} подтверждён.</h4>
   {% else %}
     <h3>Верификация провалена.</h3>

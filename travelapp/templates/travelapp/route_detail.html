@@ -8,10 +8,11 @@
             {% if object.is_active %}
               <div class="blog-post">
                 <div class="row">
-                <div class="route-image p-4 col-4">
-                  <img src="/{{object.featured_photo}}" alt="" class="img-fluid img-thumbnail">
+                <div class="route-image p-4 col-6">
+<!--                  <img src="/{{object.featured_photo}}" alt="" class="img-fluid img-thumbnail">-->
+                    <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A399dc759d34fef0826e0106d51f96edc0dbfd8ecdf99d246e2f445ff340890cd&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
                 </div>
-                <div class="col-8">
+                <div class="col-6">
                     <h2 class="blog-post-title"><a href="{% url 'travelapp:route_read' object.pk %}">{{ object.name }}</a></h2>
                     <p class="blog-post-meta">{{ object.added_at }} by <a href="#">{{ object.instructor.user.get_full_name }}</a></p>
 

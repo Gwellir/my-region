@@ -1,17 +1,18 @@
 # todo scrap after switching to API
 
 from django.contrib import auth
-from django.contrib.auth import login
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, TemplateView
 
-from django.core.mail import send_mail
-from django.conf import settings
+from rest_framework import generics
+from rest_framework.permissions import AllowAny
 
 from authapp.forms import SignupForm, UserLoginForm
 from authapp.models import AppUser
+from authapp.serializers import RegisterSerializer
+from utils.mail import send_verify_mail
 
 
 def login_view(request):
@@ -96,27 +97,6 @@ class InstructorSignupView(SignupView):
         return super().get_context_data(**kwargs)
 
 
-def send_verify_mail(user):
-    verify_link = reverse(
-        'auth:verify',
-        args=[user.email, user.activation_key],
-    )
-
-    title = f'Подтверждение аккаунта Мой Край для: {user.username}'
-    message = f'Чтобы завершить активацию аккаунта {user.username} на сервисе "Мой Край",'\
-              f'перейдите по этой ссылке:\n{settings.DOMAIN_NAME}{verify_link}'
-
-    print(f'from: {settings.EMAIL_HOST_USER}, to: {user.email}')
-    # todo this is VERY slow, either implement sending through postfix or try anymail
-    return send_mail(
-        title,
-        message,
-        settings.EMAIL_HOST_USER,
-        [user.email],
-        fail_silently=False,
-    )
-
-
 def verify(request, email, activation_key):
     try:
         user: AppUser = AppUser.objects.filter(email=email).first()
@@ -131,3 +111,10 @@ def verify(request, email, activation_key):
     except Exception as e:
         print(f'error activating user : {e.args}')
         return HttpResponseRedirect(reverse('main'))
+
+
+# API
+class APIRegisterView(generics.CreateAPIView):
+    queryset = AppUser.objects.all()
+    permission_classes = [AllowAny]
+    serializer_class = RegisterSerializer

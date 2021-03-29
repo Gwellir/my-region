@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+import rest_framework.authtoken.views as token_views
 
 import mainsite.views as main_views
 import travelapp.views as travel_views
@@ -44,4 +45,8 @@ router.register('orders', order_views.OrderViewSet)
 
 urlpatterns += [
     path('api/', include(router.urls))
+]
+
+urlpatterns += [
+    path('api-token-auth/', token_views.obtain_auth_token),
 ]
