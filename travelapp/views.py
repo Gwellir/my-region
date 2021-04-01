@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from travelapp.models import Route, Trip, RoutePhoto
 from .filters import TripFilter
 from .forms import RouteFilterForm, RouteCreateForm
-from .serializers import RouteSerializer, TripSerializer
+from .serializers import RouteSerializer, RouteRetrieveSerializer, TripSerializer
 from .permissions import OwnsOrIsInstructorOrReadOnly
 
 
@@ -83,8 +83,14 @@ class RouteViewSet(viewsets.ModelViewSet):
     """
 
     queryset = Route.objects.filter(is_active=True, is_checked=True)
-    serializer_class = RouteSerializer
+    serializer_classes = {
+        'retrieve': RouteRetrieveSerializer,
+    }
+    default_serializer_class = RouteSerializer
     permission_classes = [OwnsOrIsInstructorOrReadOnly]
+
+    def get_serializer_class(self):
+        return self.serializer_classes.get(self.action, self.default_serializer_class)
 
     def perform_create(self, serializer):
         serializer.save(instructor=self.request.user.instructor)

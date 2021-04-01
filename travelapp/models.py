@@ -25,13 +25,13 @@ class RouteLevel(models.IntegerChoices):
     EXTREME = 5, _('Экстремальный')
 
 
-# todo this is actually bad
+# todo scrap
 class TripFilterQuerySet(models.QuerySet):
     """
     Временная реализация функционала фильтрации походов для первого MVP.
     """
     def get_filtered(self, **kwargs):
-        # todo: fix double query
+        # todo scrap
         qs = self.filter(
             route__in=Route.objects.search(**kwargs),
             starts_at__gte=now(),
@@ -84,7 +84,6 @@ class Route(models.Model):
                                      decimal_places=2,
                                      default=0)
     short_desc = models.TextField(verbose_name='Краткое описание')
-    # todo implement richtextfield
     # long_desc = models.TextField(verbose_name='Полное описание')
     long_desc = RichTextField(verbose_name='Полное описание')
     # location = models.CharField(verbose_name='Местоположение', max_length=200, db_index=True)
@@ -108,7 +107,7 @@ class Route(models.Model):
     is_checked = models.BooleanField(verbose_name='Модерация проведена', default=False, db_index=True, blank=False)
     instructor = models.ForeignKey('authapp.Instructor',
                                    related_name='routes',
-                                   on_delete=models.SET_NULL,  # todo ?
+                                   on_delete=models.SET_NULL,
                                    null=True,
                                    db_index=True)
     # height_difference
@@ -161,6 +160,7 @@ class Trip(models.Model):
                                 max_digits=8,
                                 decimal_places=2,)
     announced_at = models.DateTimeField(verbose_name='Время объявления похода', auto_now_add=True)
+    # todo implement validation (start < end)
     starts_at = models.DateTimeField(verbose_name='Время начала похода', blank=False, db_index=True)
     ends_at = models.DateTimeField(verbose_name='Время окончания похода', blank=False, db_index=True)
     instructor = models.ForeignKey('authapp.Instructor',
