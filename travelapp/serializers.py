@@ -3,16 +3,30 @@ from travelapp.models import Route, Trip
 
 
 class RouteSerializer(serializers.ModelSerializer):
-    trips = serializers.SerializerMethodField()
-
     class Meta:
         model = Route
         fields = ['id', 'name', 'route_type', 'short_desc', 'long_desc',
                   'location', 'duration', 'length', 'complexity',
-                  'featured_photo', 'trips', 'photos']
+                  'featured_photo']
+
+
+class RouteRetrieveSerializer(RouteSerializer):
+    trips = serializers.SerializerMethodField()
+    photos = serializers.SerializerMethodField()
+
+    class Meta:
+        model = RouteSerializer.Meta.model
+        fields = RouteSerializer.Meta.fields + ['photos', 'trips']
 
     def get_trips(self, obj):
         return [trip.id for trip in obj.trips.all()]
+
+    def get_photos(self, obj):
+        rq = self.context.get('request')
+        return [{
+            'id': photo.id,
+            'url': rq.build_absolute_uri(photo.image.url),
+        } for photo in obj.photos.all()]
 
 
 class TripSerializer(serializers.ModelSerializer):

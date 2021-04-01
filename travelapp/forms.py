@@ -9,7 +9,6 @@ class RouteFilterForm(forms.Form):
     Реализация формы фильтра для первого MVP.
     """
     # name = forms.CharField(label='Название', max_length=100, required=False)
-    # todo
     district = forms.ModelChoiceField(queryset=District.objects.all(),
                                       label='Округ',
                                       required=False,

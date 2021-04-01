@@ -8,7 +8,7 @@ from rest_framework import viewsets
 from authapp.decorators import traveler_only
 from socialapp.forms import TripCommentCreateForm
 from socialapp.models import TripComment, CommentPhoto
-from socialapp.serializers import TripCommentSerializer
+from socialapp.serializers import TripCommentSerializer, TripCommentRetrieveSerializer
 from travelapp.models import Trip
 
 
@@ -54,7 +54,13 @@ class TripCommentViewSet(viewsets.ModelViewSet):
     """
 
     queryset = TripComment.objects.filter(is_active=True, is_allowed=True)
-    serializer_class = TripCommentSerializer
+    serializer_classes = {
+        'retrieve': TripCommentRetrieveSerializer,
+    }
+    default_serializer_class = TripCommentSerializer
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+    def get_serializer_class(self):
+        return self.serializer_classes.get(self.action, self.default_serializer_class)
