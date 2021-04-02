@@ -1,47 +1,37 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark my-3">
-    <a href="#" class="navbar-brand">Мой Край</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-collapse collapse" id="navbarCollapse" style="">
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="{% url 'main' %}">Главная <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'travelapp:trip_selector' %}">Выбрать поход</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'travelapp:route_list' %}">Маршруты</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Обучение</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Контакты</a>
-        </li>
-    </ul>
-    <ul class="navbar-nav mt-2 mt-md-0">
-        {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="
-            {% if user.is_traveler == True %}
-                {% url 'userapp:traveler_profile' %}
-            {% else %}
-                {% url 'userapp:instructor_profile' %}
-            {% endif %}">{{ user.first_name|default:'User' }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'auth:logout' %}">Выйти</a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'authapp:login' %}">Вход</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'authapp:register' %}">Регистрация</a>
-        </li>
-        {% endif %}
-    </ul>
+<header class="flex items-center justify-around w-auto h-28 bg-primary">
+  <a href="/">
+    <div class="flex items-center px-2 cursor-pointer">
+      <img src="/static/icons/MainLogo.png" class="h-20 " alt="mainLogo" />
+      <div class="flex flex-col">
+        <span class="text-textBlack text-logoSize font-arkhip py-1 tracking-widest">
+          мой край
+        </span>
+        <span class="text-textBlack font-arkhip font-normal text-sm">
+          Сервис путешествий по России
+        </span>
+      </div>
     </div>
-</nav>
+  </a>
+  <div class="flex-row justify-center w-1/3">
+    <a href="/" class="px-6 font-jost text-black hover:text-gray-400 cursor-pointer">Главная</a>
+    <span class="px-6 font-jost text-gray-400 hover:text-black cursor-pointer">Расписание</span>
+    <span class="px-6 font-jost text-gray-400 hover:text-black cursor-pointer">Путешествeнникам</span>
+  </div>
+  <div class="flex">
+    {% if user.is_authenticated %}
+        <a class="nav-link px-1 text-gray-400 font-jost focus:outline-none" href="
+        {% if user.is_traveler == True %}
+            {% url 'userapp:traveler_profile' %}
+        {% else %}
+            {% url 'userapp:instructor_profile' %}
+        {% endif %}">{{ user.first_name|default:'User' }}</a>
+        <a class="nav-link px-2 text-gray-400 font-jost focus:outline-none" href="{% url 'auth:logout' %}">Выйти</a>
+    {% else %}
+      <a href="{% url 'authapp:register' %}" class="px-5 text-gray-400 font-jost focus:outline-none">Регистрация</a>
+      <a href="{% url 'authapp:login' %}" class="px-5 text-gray-400 font-jost focus:outline-none">Войти</a>
+      <a href="{% url 'authapp:login' %}"><img class="cursor-pointer" src="/static/icons/people.png" alt="people" /></a>
+    {% endif %}
+  </div>
+  <ModalMain active={modalActive} setActive={setModalActive} children={<Registred }/>
+  <ModalMain active={logAct} setActive={setLogAct} children={<Login }/>
+</header>

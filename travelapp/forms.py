@@ -18,7 +18,7 @@ class RouteFilterForm(forms.Form):
                                     label='Регион',
                                     empty_label='Регион',
                                     required=False)
-    type = forms.ChoiceField(
+    route_type = forms.ChoiceField(
         label='Тип маршрута',
         choices=[('', 'Тип маршрута')] + [(x, x.label) for x in RouteType],
         required=False,
@@ -45,4 +45,4 @@ class RouteCreateForm(forms.ModelForm):
     class Meta:
         model = Route
         fields = ['name', 'route_type', 'base_price', 'short_desc', 'long_desc', 'location',
-                  'duration', 'length', 'complexity', 'featured_photo', 'photos', 'gpx_track']
+                  'duration', 'length', 'complexity', 'featured_photo', 'photos', 'gpx_track', 'ya_constructor']

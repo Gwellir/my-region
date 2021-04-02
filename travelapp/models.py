@@ -2,7 +2,6 @@ from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from djmoney.models.fields import MoneyField
-# from authapp.models import Instructor
 from djrichtextfield.models import RichTextField
 
 from socialapp.models import TripComment
@@ -59,8 +58,8 @@ class RouteFilterQuerySet(models.QuerySet):
             qs = qs.filter(location=kwargs['region'])
         elif kwargs.get('district', ''):
             qs = qs.filter(location__district=kwargs['district'])
-        if kwargs.get('type', ''):
-            qs = qs.filter(type=kwargs['type'])
+        if kwargs.get('route_type', ''):
+            qs = qs.filter(route_type=kwargs['route_type'])
         if kwargs.get('level', ''):
             qs = qs.filter(complexity=kwargs['level'])
 
@@ -103,6 +102,7 @@ class Route(models.Model):
     featured_photo = models.ImageField(upload_to='static/img', verbose_name='Фото для оформления маршрута', blank=True)
     # todo supposedly add a model for additional info about the route...
     gpx_track = models.FileField(upload_to='static/tracks', verbose_name='Трек маршрута в формате GPX', blank=True)
+    ya_constructor = models.URLField(verbose_name='Маршрут Yandex Map', null=True)
     is_active = models.BooleanField(verbose_name='Маршрут доступен для проведения', default=True, db_index=True, blank=False)
     is_checked = models.BooleanField(verbose_name='Модерация проведена', default=False, db_index=True, blank=False)
     instructor = models.ForeignKey('authapp.Instructor',

@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Arkhip';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/static/fonts/Arkhip.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Jost';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/static/fonts/Jost-Regular.ttf') format('truetype');
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Jost', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.font-arkhip {
+    font-family: 'Arkhip';
+}
+
+.text-logoSize {
+    font-size: 25px;
+    line-height: 30px;
+}
+
+.text-sm {
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.container-md {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.text-addressSize {
+    font-size: 20px;
+    line-height: 29px;
+}
+
+/*route cards*/
+.shadow-shadowRoute {
+    --tw-shadow: 0px 1px 9px 0px rgba(44,84,13,0.2);
+    box-shadow: var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow);
+}
+
+.bg-primary {
+    --tw-bg-opacity: 1;
+    background-color: rgba(255,255,255,var(--tw-bg-opacity)) !important;
+}
+
+.w-72 {
+    width: 18rem;
+}
+.text-white {
+    --tw-text-opacity: 1;
+    color: rgba(255,255,255,var(--tw-text-opacity));
+}
+.mb-9 {
+    margin-bottom: 2.25rem;
+}
+.text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+.h-11 {
+    height: 2.75rem;
+}
+.font-medium {
+    font-weight: 500;
+}
+.font-jost {
+    font-family: jost;
+}
+.rounded-3xl {
+    border-radius: 1.5rem;
+}
+.bg-bgBtn {
+    --tw-bg-opacity: 1;
+    background-color: rgba(45,101,1,var(--tw-bg-opacity));
+}
+button, input, optgroup, select, textarea {
+    padding: 0;
+    line-height: inherit;
+    color: inherit;
+}
+button {
+    cursor: pointer;
+}
+button {
+    background-color: transparent;
+    background-image: none;
+}
+button {
+    -webkit-appearance: button;
+}
+button, select {
+    text-transform: none;
+}
+button, input, optgroup, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+}
+* {
+    --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
+    --tw-ring-offset-width: 0px;
+    --tw-ring-offset-color: #fff;
+    --tw-ring-color: rgba(59,130,246,0.5);
+    --tw-ring-offset-shadow: 0 0 transparent;
+    --tw-ring-shadow: 0 0 transparent;
+}
+* {
+    --tw-shadow: 0 0 transparent;
+}
+*, :after, :before {
+    box-sizing: border-box;
+    border: 0 solid #e5e7eb;
+}
+
+img.featured-photo {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+/* reviews */
+.bg-secondary {
+    --tw-bg-opacity: 1;
+    background-color: rgba(231,238,231,var(--tw-bg-opacity)) !important;
+}

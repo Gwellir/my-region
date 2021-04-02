@@ -1,0 +1,48 @@
+<form action="{% url 'travelapp:route_list' %}" method="get">
+  <div class="row filter-form d-flex justify-content-center m-4">
+  {% for field in form %}
+    <div class="fieldWrapper">
+          {{ field.errors }}
+          <div class="btn-group border">
+              <button type="button" class="btn dropdown-toggle" data-name="{{ field.name }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{ field.label }}
+              </button>
+              <div class="dropdown-menu">
+                  {% if field.field.choices %}
+                      {% if field.name == 'region' %}
+                          <a class="dropdown-item {{field.name}}-option"
+                               data-value="" href="#">{{field.label}}</a>
+                          <div class="dropdown-divider"></div>
+                          {% for choice in field.field.choices.queryset %}
+                            <a class="dropdown-item {{field.name}}-option"
+                               data-district="{{ choice.district.pk }}"
+                               data-value="{{ choice.pk }}" href="#">{{ choice.name }}</a>
+                          {% endfor %}
+                      {% else %}
+                          {% for choice in field.field.choices %}
+                            <a class="dropdown-item {{field.name}}-option" data-value="{{ choice.0 }}" href="#">{{ choice.1 }}</a>
+                            {% if forloop.first %}
+                            <div class="dropdown-divider"></div>
+                            {% endif %}
+                          {% endfor %}
+                      {% endif %}
+                  {% elif 'date_' in field.name %}
+                    <div class="dropdown-item">
+                        <input type="date" class="form-control {{field.name}}-input" id="{{field.name}}" data-name="{{field.name}}">
+                    </div>
+                  {% elif 'price_' in field.name %}
+                    <div class="dropdown-item">
+                        <div class="row text-align-bottom"><input type="text" class="col-9 form-control {{field.name}}-input" id="{{field.name}}" data-name="{{field.name}}">
+                        &nbsp;p.</div>
+                    </div>
+                  {% endif %}
+              </div>
+          </div>
+          {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+          {% endif %}
+    </div>
+  {% endfor %}
+  <input type="submit" id="filter-submit" value="Поиск">
+  </div>
+</form>

@@ -118,7 +118,7 @@ class Traveler(models.Model):
 
 class Instructor(models.Model):
     """
-    Моделья профиля инструктора.
+    Модель профиля инструктора.
     """
     user = models.OneToOneField(AppUser, unique=True, db_index=True, null=True, on_delete=models.CASCADE)
     about = models.TextField(verbose_name='О себе', blank=True, default='Обо мне')
