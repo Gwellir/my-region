@@ -23,19 +23,19 @@ const Footer = () => {
                 <span className="font-jost text-telSize">+7 (982) 234 45 28</span>
             </div>
             <div className="flex flex-col mt-3.5">
-                <span className="font-jost text-addressSize font-medium pb-2">Ссылки</span>
+                <span className="font-jostmd text-addressSize pb-2">Ссылки</span>
                 <span className="font-jost text-addressSize pb-2">Маршруты</span>
                 <span className="font-jost text-addressSize pb-2">Обучение</span>
                 <span className="font-jost text-addressSize pb-2">Личный кабинет</span>
             </div>
             <div className="flex flex-col mt-3.5">
-                <span className="font-jost text-addressSize font-medium pb-2">Организациям</span>
+                <span className="font-jostmd text-addressSize pb-2">Организациям</span>
                 <span className="font-jost text-addressSize pb-2">ООПТ</span>
                 <span className="font-jost text-addressSize pb-2">Тарифы</span>
                 <span className="font-jost text-addressSize pb-2">Сотрудничество</span>
             </div>
             <div className="flex flex-col mt-3.5">
-                <span className="font-jost text-addressSize font-medium pb-2">Обратная связь</span>
+                <span className="font-jostmd text-addressSize pb-2">Обратная связь</span>
                 <span className="font-jost text-addressSize pb-2">Вакансии</span>
                 <span className="font-jost text-addressSize pb-2">Контакты</span>
                 <span className="font-jost text-addressSize pb-2">Обратная связь</span>

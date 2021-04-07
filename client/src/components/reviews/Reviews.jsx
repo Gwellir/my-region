@@ -15,15 +15,15 @@ const Reviews = () => {
                     <p className="font-jost text-pReviews pb-6">Отдохнул отлично, перезагрузился. Тур покупал в последний момент, чтобы убежать на юг из холодной Москвы. Про Египет не знал ничего кроме пирамид. Луксор с его древними храмами вообще оказался для меня полным сюрпризом. </p>
                     <div>
                         <span className="font-jost text-textSeach">Сложность: </span>
-                        <span className="font-jost text-textSeach font-medium">Тяжело</span>
+                        <span className="font-jostmd text-textSeach">Тяжело</span>
                     </div>
                     <div>
                         <span className="font-jost text-textSeach">Инструктор: </span>
-                        <span className="font-jost text-textSeach font-medium">Понравился</span>
+                        <span className="font-jostmd text-textSeach">Понравился</span>
                     </div>
                     <div>
                         <span className="font-jost text-textSeach">Общая оценка: </span>
-                        <span className="font-jost text-textSeach font-medium">Хорошо</span>
+                        <span className="font-jostmd text-textSeach">Хорошо</span>
                     </div>
                 </div>
                 <div className="flex flex-col w-1/3 bg-primary rounded-xl p-8">
@@ -33,15 +33,15 @@ const Reviews = () => {
                     <p className="font-jost text-pReviews pb-6">Отдохнул отлично, перезагрузился. Тур покупал в последний момент, чтобы убежать на юг из холодной Москвы. Про Египет не знал ничего кроме пирамид. Луксор с его древними храмами вообще оказался для меня полным сюрпризом. </p>
                     <div>
                         <span className="font-jost text-textSeach">Сложность: </span>
-                        <span className="font-jost text-textSeach font-medium">Тяжело</span>
+                        <span className="font-jostmd text-textSeach">Тяжело</span>
                     </div>
                     <div>
                         <span className="font-jost text-textSeach">Инструктор: </span>
-                        <span className="font-jost text-textSeach font-medium">Понравился</span>
+                        <span className="font-jostmd text-textSeach">Понравился</span>
                     </div>
                     <div>
                         <span className="font-jost text-textSeach">Общая оценка: </span>
-                        <span className="font-jost text-textSeach font-medium">Хорошо</span>
+                        <span className="font-jostmd text-textSeach">Хорошо</span>
                     </div>
                 </div>
                 <img className="w-12 h-12" src={arrowRight} alt="arrowRight" />

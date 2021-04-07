@@ -9,8 +9,8 @@
     "@testing-library/user-event": "^12.8.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
     "react-query": "^3.13.0",
-    "react-query-devtools": "^2.6.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-svg": "^12.1.0",
@@ -41,6 +41,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/helper-validator-identifier": "^7.12.11",
     "@tailwindcss/postcss7-compat": "^2.0.3",
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.35",
