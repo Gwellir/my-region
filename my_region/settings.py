@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'djrichtextfield',
     'django_filters',
     'rest_framework.authtoken',
+    'imagekit',
 ]
 
 MIDDLEWARE = [
@@ -135,6 +136,11 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+IMAGEKIT_CACHEFILE_DIR = 'CACHE/images'
 
 # todo scrap after switching to API
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

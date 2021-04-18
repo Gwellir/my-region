@@ -3,6 +3,10 @@ from django.utils.translation import gettext_lazy as _
 
 # from authapp.models import AppUser
 # from travelapp.models import Trip
+from imagekit.models import ProcessedImageField, ImageSpecField
+from pilkit.processors import ResizeToFit
+
+from my_region.constants import CommentPhotoSizes
 
 
 class Comment(models.Model):
@@ -47,4 +51,17 @@ class CommentPhoto(models.Model):
     """
     comment = models.ForeignKey(Comment, verbose_name='Комментарий', related_name='photos', on_delete=models.CASCADE)
     added_at = models.DateTimeField(verbose_name='Добавлено', auto_now_add=True)
-    image = models.ImageField(upload_to='static/comment_media')
+    image = ProcessedImageField(upload_to='comment_media',
+                                processors=[ResizeToFit(
+                                    CommentPhotoSizes.MAX_WIDTH,
+                                    CommentPhotoSizes.MAX_HEIGHT,
+                                )],
+                                format='JPEG',
+                                options={'quality': 80},)
+    image_thumb = ImageSpecField(source='image',
+                                 processors=[ResizeToFit(
+                                     CommentPhotoSizes.THUMB_WIDTH,
+                                     CommentPhotoSizes.THUMB_HEIGHT,
+                                 )],
+                                 format='JPEG',
+                                 options={'quality': 70},)

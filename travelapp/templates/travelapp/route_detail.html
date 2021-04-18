@@ -10,7 +10,7 @@
                 <div class="row">
                 <div class="route-image p-4 col-6">
                     {% if not object.ya_constructor %}
-                        <img src="/{{object.featured_photo}}" alt="" class="img-fluid img-thumbnail">
+                        <img src="{{object.featured_photo.url}}" alt="" class="img-fluid img-thumbnail">
                     {% else %}
                         <script type="text/javascript" charset="utf-8" async src="{{object.ya_constructor}}&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
                     {% endif %}
@@ -40,8 +40,8 @@
                 {% for photo in object.photos.all %}
                   <div class="col-md-3">
                     <div class="route-image p-2">
-                      <a href="/{{ photo.image }}">
-                        <img src="/{{ photo.image }}" class="img-fluid img-thumbnail" alt="Lights">
+                      <a href="{{ photo.image.url }}">
+                        <img src="{{ photo.image.url }}" class="img-fluid img-thumbnail" alt="Lights">
                         <div class="caption">
                           <p>Lorem ipsum...</p>
                         </div>
@@ -96,8 +96,8 @@
                         {% for photo in comment.photos.all %}
                           <div class="col-md-4">
                             <div class="route-image p-2">
-                              <a href="/{{ photo.image }}">
-                                <img src="/{{ photo.image }}" class="img-fluid img-thumbnail" alt="Lights">
+                              <a href="{{ photo.image.url }}">
+                                <img src="{{ photo.image_thumb.url }}" class="img-fluid img-thumbnail" alt="Lights">
                                 <div class="caption">
                                   <p>Lorem ipsum...</p>
                                 </div>

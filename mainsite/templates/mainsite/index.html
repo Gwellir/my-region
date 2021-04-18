@@ -12,7 +12,7 @@
       <div class="grid grid-cols-3 gap-40">
       {% for route in route_list %}
         <div class="pl-8 mt-11 relative shadow-shadowRoute">
-        <img class="pr-8 pt-9 pb-5 featured-photo" src="{{ route.featured_photo }}" width="285px" alt="foto" />
+        <img class="pr-8 pt-9 pb-5 featured-photo" src="{{ route.featured_thumb.url }}" width="285px" alt="photo" />
         <div class="flex absolute right-12 top-12">
           {% with ''|center:5 as range %}
               {% for _ in range %}

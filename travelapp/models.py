@@ -3,7 +3,10 @@ from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from djmoney.models.fields import MoneyField
 from djrichtextfield.models import RichTextField
+from imagekit.models import ProcessedImageField, ImageSpecField
+from pilkit.processors import ResizeToFit
 
+from my_region.constants import RoutePhotoSizes
 from socialapp.models import TripComment
 
 
@@ -99,9 +102,24 @@ class Route(models.Model):
                                      db_index=True)
     added_at = models.DateTimeField(verbose_name='Время создания маршрута', auto_now_add=True)
     # todo implement proper working with photos, including thumbnailing
-    featured_photo = models.ImageField(upload_to='static/img', verbose_name='Фото для оформления маршрута', blank=True)
+    featured_photo = ProcessedImageField(upload_to='img',
+                                         verbose_name='Фото для оформления маршрута',
+                                         blank=True,
+                                         processors=[ResizeToFit(
+                                             RoutePhotoSizes.MAX_WIDTH,
+                                             RoutePhotoSizes.MAX_HEIGHT)
+                                         ],
+                                         format='JPEG',
+                                         options={'quality': 80})
+    featured_thumb = ImageSpecField(source='featured_photo',
+                                    processors=[ResizeToFit(
+                                        RoutePhotoSizes.THUMB_WIDTH,
+                                        RoutePhotoSizes.THUMB_HEIGHT)
+                                    ],
+                                    format='JPEG',
+                                    options={'quality': 70})
     # todo supposedly add a model for additional info about the route...
-    gpx_track = models.FileField(upload_to='static/tracks', verbose_name='Трек маршрута в формате GPX', blank=True)
+    gpx_track = models.FileField(upload_to='tracks', verbose_name='Трек маршрута в формате GPX', blank=True)
     ya_constructor = models.URLField(verbose_name='Маршрут Yandex Map', null=True)
     is_active = models.BooleanField(verbose_name='Маршрут доступен для проведения', default=True, db_index=True, blank=False)
     is_checked = models.BooleanField(verbose_name='Модерация проведена', default=False, db_index=True, blank=False)
@@ -142,7 +160,7 @@ class RoutePhoto(models.Model):
     """
     Модель сопроводительной фотографии маршрута.
     """
-    image = models.ImageField(upload_to='static/route_photos')
+    image = models.ImageField(upload_to='route_photos')
     added_at = models.DateTimeField(verbose_name='Время добавления', auto_now_add=True)
     route = models.ForeignKey(Route, related_name='photos', on_delete=models.CASCADE)
 

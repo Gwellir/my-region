@@ -1,3 +1,4 @@
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
@@ -7,6 +8,7 @@ import mainsite.views as main_views
 import travelapp.views as travel_views
 import socialapp.views as social_views
 import ordersapp.views as order_views
+from my_region import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -18,10 +20,15 @@ urlpatterns = [
     path('social/', include('socialapp.urls', namespace='social')),
 ]
 
+# RICH TEXT
 urlpatterns += [
     path('djrichtextfield/', include('djrichtextfield.urls')),
 ]
 
+# MEDIA
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# API ROUTER
 router = DefaultRouter()
 router.register('routes', travel_views.RouteViewSet)
 router.register('trips', travel_views.TripViewSet)
@@ -32,6 +39,7 @@ urlpatterns += [
     path('api/', include(router.urls))
 ]
 
+# API TOKEN AUTHENTICATION
 urlpatterns += [
     path('api-token-auth/', token_views.obtain_auth_token),
 ]

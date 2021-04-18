@@ -8,9 +8,12 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
+from imagekit.models import ProcessedImageField
+from imagekit import processors
 from rest_framework.authtoken.models import Token
 
 from ordersapp.models import OrderItem
+from my_region.constants import ProfilePhotoSizes as UpicSizes
 
 
 class Gender(models.IntegerChoices):
@@ -39,7 +42,14 @@ class AppUser(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name']
 
-    avatar = models.ImageField(upload_to='static/user_pics', blank=True, null=True)
+    avatar = ProcessedImageField(upload_to='media/user_pics',
+                                 blank=True,
+                                 null=True,
+                                 processors=processors.ResizeToFit(
+                                     UpicSizes.WIDTH,
+                                     UpicSizes.HEIGHT),
+                                 format='JPEG',
+                                 options={'quality': 60},)
     date_of_birth = models.DateField(verbose_name='Дата рождения', default=now)
     activation_key = models.CharField(verbose_name='Ключ активации', max_length=128, blank=True)
     activation_key_expiry = models.DateTimeField(
