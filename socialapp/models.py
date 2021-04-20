@@ -32,6 +32,14 @@ class TripScore(models.IntegerChoices):
     AWESOME = 5, _('Отлично')
 
 
+class InstructorScore(models.IntegerChoices):
+    """
+    Перечисление вариантов оценки работы инструктора.
+    """
+    LIKED = 1, _('Понравился')
+    NOT_LIKED = 2, _('Не понравился')
+
+
 class TripComment(Comment):
     """
     Модель комментария к походу.
@@ -40,6 +48,10 @@ class TripComment(Comment):
     # trip specific fields
     score = models.IntegerField(verbose_name='Оценка похода',
                                 choices=TripScore.choices)
+    instructor_score = models.IntegerField(verbose_name='Оценка инструктора',
+                                           choices=InstructorScore.choices,
+                                           null=True)
+    # difficulty?
 
     def __str__(self):
         return f'{self.score}* - {self.author}: {self.trip}'
