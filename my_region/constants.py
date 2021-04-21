@@ -3,10 +3,15 @@ from enum import Enum
 
 # IMAGE SIZES
 class RoutePhotoSizes:
+    # for storage
     MAX_HEIGHT = 2048
     MAX_WIDTH = 2048
-    THUMB_HEIGHT = 220
-    THUMB_WIDTH = 285
+    # for the route cards
+    CARD_HEIGHT = 220
+    CARD_WIDTH = 285
+    # for route_detail thumbs
+    THUMB_HEIGHT = 126
+    THUMB_WIDTH = 126
 
 
 class ProfilePhotoSizes:

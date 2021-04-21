@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
-from djmoney.models.fields import MoneyField
 from djrichtextfield.models import RichTextField
 from imagekit.models import ProcessedImageField, ImageSpecField
 from pilkit.processors import ResizeToFit
@@ -86,9 +85,7 @@ class Route(models.Model):
                                      decimal_places=2,
                                      default=0)
     short_desc = models.TextField(verbose_name='Краткое описание')
-    # long_desc = models.TextField(verbose_name='Полное описание')
     long_desc = RichTextField(verbose_name='Полное описание')
-    # location = models.CharField(verbose_name='Местоположение', max_length=200, db_index=True)
     location = models.ForeignKey('travelapp.Region',
                                  verbose_name='Местоположение',
                                  db_index=True,
@@ -113,8 +110,8 @@ class Route(models.Model):
                                          options={'quality': 80})
     featured_thumb = ImageSpecField(source='featured_photo',
                                     processors=[ResizeToFit(
-                                        RoutePhotoSizes.THUMB_WIDTH,
-                                        RoutePhotoSizes.THUMB_HEIGHT)
+                                        RoutePhotoSizes.CARD_WIDTH,
+                                        RoutePhotoSizes.CARD_HEIGHT)
                                     ],
                                     format='JPEG',
                                     options={'quality': 70})
@@ -160,7 +157,22 @@ class RoutePhoto(models.Model):
     """
     Модель сопроводительной фотографии маршрута.
     """
-    image = models.ImageField(upload_to='route_photos')
+    image = ProcessedImageField(upload_to='route_photos',
+                                verbose_name='Фото для оформления маршрута',
+                                blank=True,
+                                processors=[ResizeToFit(
+                                    RoutePhotoSizes.MAX_WIDTH,
+                                    RoutePhotoSizes.MAX_HEIGHT)
+                                ],
+                                format='JPEG',
+                                options={'quality': 80})
+    image_thumb = ImageSpecField(source='image',
+                                 processors=[ResizeToFit(
+                                     RoutePhotoSizes.THUMB_WIDTH,
+                                     RoutePhotoSizes.THUMB_HEIGHT)
+                                 ],
+                                 format='JPEG',
+                                 options={'quality': 70})
     added_at = models.DateTimeField(verbose_name='Время добавления', auto_now_add=True)
     route = models.ForeignKey(Route, related_name='photos', on_delete=models.CASCADE)
 
