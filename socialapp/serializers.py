@@ -22,6 +22,7 @@ class TripCommentRetrieveSerializer(TripCommentSerializer):
         rq = self.context.get('request')
         return [{
             'id': photo.id,
+            'thumb_url': rq.build_absolute_uri(photo.image_thumb.url),
             'url': rq.build_absolute_uri(photo.image.url),
             # todo maybe unify objects_with_lists_of_photos as well
         } for photo in obj.photos.all()]

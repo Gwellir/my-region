@@ -37,7 +37,7 @@ $(".dropdown-menu a.dropdown-item").click(setDropdownValue);
 
 $("#filter-submit").click(function(e) {
     e.preventDefault();
-    let url = new URL(window.location.origin + window.location.pathname);
+    let url = new URL(window.location.origin + "/travel/");
     for (el of $(".filter-form button.dropdown-toggle")) {
         if (el.value)
             url.searchParams.append(el.dataset.name, el.value);

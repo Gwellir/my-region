@@ -1,10 +1,11 @@
 from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
-from djmoney.models.fields import MoneyField
-# from authapp.models import Instructor
 from djrichtextfield.models import RichTextField
+from imagekit.models import ProcessedImageField, ImageSpecField
+from pilkit.processors import ResizeToFit
 
+from my_region.constants import RoutePhotoSizes
 from socialapp.models import TripComment
 
 
@@ -59,8 +60,8 @@ class RouteFilterQuerySet(models.QuerySet):
             qs = qs.filter(location=kwargs['region'])
         elif kwargs.get('district', ''):
             qs = qs.filter(location__district=kwargs['district'])
-        if kwargs.get('type', ''):
-            qs = qs.filter(type=kwargs['type'])
+        if kwargs.get('route_type', ''):
+            qs = qs.filter(route_type=kwargs['route_type'])
         if kwargs.get('level', ''):
             qs = qs.filter(complexity=kwargs['level'])
 
@@ -84,9 +85,7 @@ class Route(models.Model):
                                      decimal_places=2,
                                      default=0)
     short_desc = models.TextField(verbose_name='Краткое описание')
-    # long_desc = models.TextField(verbose_name='Полное описание')
     long_desc = RichTextField(verbose_name='Полное описание')
-    # location = models.CharField(verbose_name='Местоположение', max_length=200, db_index=True)
     location = models.ForeignKey('travelapp.Region',
                                  verbose_name='Местоположение',
                                  db_index=True,
@@ -100,9 +99,25 @@ class Route(models.Model):
                                      db_index=True)
     added_at = models.DateTimeField(verbose_name='Время создания маршрута', auto_now_add=True)
     # todo implement proper working with photos, including thumbnailing
-    featured_photo = models.ImageField(upload_to='static/img', verbose_name='Фото для оформления маршрута', blank=True)
+    featured_photo = ProcessedImageField(upload_to='img',
+                                         verbose_name='Фото для оформления маршрута',
+                                         blank=True,
+                                         processors=[ResizeToFit(
+                                             RoutePhotoSizes.MAX_WIDTH,
+                                             RoutePhotoSizes.MAX_HEIGHT)
+                                         ],
+                                         format='JPEG',
+                                         options={'quality': 80})
+    featured_thumb = ImageSpecField(source='featured_photo',
+                                    processors=[ResizeToFit(
+                                        RoutePhotoSizes.CARD_WIDTH,
+                                        RoutePhotoSizes.CARD_HEIGHT)
+                                    ],
+                                    format='JPEG',
+                                    options={'quality': 70})
     # todo supposedly add a model for additional info about the route...
-    gpx_track = models.FileField(upload_to='static/tracks', verbose_name='Трек маршрута в формате GPX', blank=True)
+    gpx_track = models.FileField(upload_to='tracks', verbose_name='Трек маршрута в формате GPX', blank=True)
+    ya_constructor = models.URLField(verbose_name='Маршрут Yandex Map', null=True)
     is_active = models.BooleanField(verbose_name='Маршрут доступен для проведения', default=True, db_index=True, blank=False)
     is_checked = models.BooleanField(verbose_name='Модерация проведена', default=False, db_index=True, blank=False)
     instructor = models.ForeignKey('authapp.Instructor',
@@ -142,7 +157,22 @@ class RoutePhoto(models.Model):
     """
     Модель сопроводительной фотографии маршрута.
     """
-    image = models.ImageField(upload_to='static/route_photos')
+    image = ProcessedImageField(upload_to='route_photos',
+                                verbose_name='Фото для оформления маршрута',
+                                blank=True,
+                                processors=[ResizeToFit(
+                                    RoutePhotoSizes.MAX_WIDTH,
+                                    RoutePhotoSizes.MAX_HEIGHT)
+                                ],
+                                format='JPEG',
+                                options={'quality': 80})
+    image_thumb = ImageSpecField(source='image',
+                                 processors=[ResizeToFit(
+                                     RoutePhotoSizes.THUMB_WIDTH,
+                                     RoutePhotoSizes.THUMB_HEIGHT)
+                                 ],
+                                 format='JPEG',
+                                 options={'quality': 70})
     added_at = models.DateTimeField(verbose_name='Время добавления', auto_now_add=True)
     route = models.ForeignKey(Route, related_name='photos', on_delete=models.CASCADE)
 

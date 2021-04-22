@@ -3,11 +3,17 @@ from travelapp.models import Route, Trip
 
 
 class RouteSerializer(serializers.ModelSerializer):
+    featured_thumb = serializers.SerializerMethodField()
+
     class Meta:
         model = Route
         fields = ['id', 'name', 'route_type', 'short_desc', 'long_desc',
                   'location', 'duration', 'length', 'complexity',
-                  'featured_photo']
+                  'featured_photo', 'featured_thumb']
+
+    def get_featured_thumb(self, obj):
+        rq = self.context.get('request')
+        return rq.build_absolute_uri(obj.featured_thumb.url)
 
 
 class RouteRetrieveSerializer(RouteSerializer):
@@ -25,6 +31,7 @@ class RouteRetrieveSerializer(RouteSerializer):
         rq = self.context.get('request')
         return [{
             'id': photo.id,
+            'thumb_url': rq.build_absolute_uri(photo.image_thumb.url),
             'url': rq.build_absolute_uri(photo.image.url),
         } for photo in obj.photos.all()]
 

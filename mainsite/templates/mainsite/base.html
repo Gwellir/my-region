@@ -12,8 +12,11 @@
         <link href="{% static 'css/fontawesome.min.css' %}" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Arkhip:wght@400;500;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<!--        <link rel="stylesheet" href="{% static 'css/style.css' %}">-->
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
     {% endblock %}
 
     {% block js %}
@@ -27,49 +30,43 @@
     <div class="content container-md">
         {% block menu %}
             {% include 'mainsite/includes/inc_menu.html' %}
-
         {% endblock %}
 
         {% block content %}
         {% endblock %}
 
         {% block footer %}
-        <footer class="pt-4 mx-3 my-md-4 pt-md-5 border-top">
-            <div class="row">
-              <div class="col-12 col-md">
-<!--                <img class="mb-2" src="/docs/4.6/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">-->
-                  <h3>МОЙ КРАЙ</h3>
-                  <p>г.Москва, ул.Родионова 13, офис 156</p>
-                  <p>+7 (982) 234 45 28</p>
-                  <small class="d-block mb-3 text-muted">© 2021</small>
-              </div>
-              <div class="col-6 col-md">
-                <h5>Ссылки</h5>
-                <ul class="list-unstyled text-small">
-                  <li><a class="text-muted" href="#">Маршруты</a></li>
-                  <li><a class="text-muted" href="#">Обучение</a></li>
-                  <li><a class="text-muted" href="#">Личный кабинет</a></li>
-                </ul>
-              </div>
-              <div class="col-6 col-md">
-                <h5>Организаторам</h5>
-                <ul class="list-unstyled text-small">
-                  <li><a class="text-muted" href="#">ООПТ</a></li>
-                  <li><a class="text-muted" href="#">Тарифы</a></li>
-                  <li><a class="text-muted" href="#">Тарифы</a></li>
-                  <li><a class="text-muted" href="#">Сотрудничество</a></li>
-                </ul>
-              </div>
-              <div class="col-6 col-md">
-                <h5>Обратная связь</h5>
-                <ul class="list-unstyled text-small">
-                  <li><a class="text-muted" href="#">Вакансии</a></li>
-                  <li><a class="text-muted" href="#">Контакты</a></li>
-                  <li><a class="text-muted" href="#">Обратная связь</a></li>
-                </ul>
-              </div>
+        <div class="w-auto bg-primary">
+            <div class="flex justify-around pt-16 px-8 pb-11">
+            <div class="flex flex-col">
+                <div class="flex items-center pb-5">
+                    <img class="h-16" src="/static/icons/MainLogo.png" alt="mainLogo" />
+                    <span class="font-arkhip text-logoSize tracking-widest">мой край</span>
+                </div>
+                <span class="w-64 font-jost text-addressSize pb-1">г.Москва, ул.Родионова 13, офис 156</span>
+                <span class="font-jost text-telSize">+7 (982) 234 45 28</span>
             </div>
-          </footer>
+            <div class="flex flex-col mt-3.5">
+                <span class="font-jost text-addressSize font-medium pb-2">Ссылки</span>
+                <span class="font-jost text-addressSize pb-2">Маршруты</span>
+                <span class="font-jost text-addressSize pb-2">Обучение</span>
+                <span class="font-jost text-addressSize pb-2">Личный кабинет</span>
+            </div>
+            <div class="flex flex-col mt-3.5">
+                <span class="font-jost text-addressSize font-medium pb-2">Организациям</span>
+                <span class="font-jost text-addressSize pb-2">ООПТ</span>
+                <span class="font-jost text-addressSize pb-2">Тарифы</span>
+                <span class="font-jost text-addressSize pb-2">Сотрудничество</span>
+            </div>
+            <div class="flex flex-col mt-3.5">
+                <span class="font-jost text-addressSize font-medium pb-2">Обратная связь</span>
+                <span class="font-jost text-addressSize pb-2">Вакансии</span>
+                <span class="font-jost text-addressSize pb-2">Контакты</span>
+                <span class="font-jost text-addressSize pb-2">Обратная связь</span>
+            </div>
+            </div>
+               <div class="flex pb-44 justify-center"><img class="pl-6" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAK9SURBVHgB1ZnbkaJAFIYPqFU+Oo9WeSOC0QgGI9jJYDSCnYlgMQMzGIxg3QhkI1gzEC/vOo+Wt/0PBQwiIiho81W1jdhYv+3f3adPS5Qgk8mkgaqRy+W4pt1ut0JlFUVRxpQQEt0ARKr5fP4Vly8ozQiPGPv9/i/K8JYfEVs0hJYg9Ccu31FKdD2mJElapVIZUExiiZ7P5yxWo9vE+oktPpLoxWLRPBwOnxTNAtdi4B/slstl81JD+VID7l0IHlG6ghl1u92OZrPZ66WGoaIh+BeqPiVrhzAasMrv6XT6HtborD1swRo9CMwwH/V6vR/0WaBoe8AFPnBn2tVq1fDfPBHNCwQGxITEYAUtLf/gPPE0Go1IHEoYnJ/+m0eibR83SCxU/8B07SGYLfys0ONY+RWOY757GkGORuJSkmW547xxRWN+fCGBgeg395pfsAp1SDwv+2lizKl8YYlGL/+gDIAFx1riHXuolAFgkWeuJTuC+0cZAbPIk7zZbO4VDCVCsVjkmUROO+RMFPj6mT2dqZ7GZvnp4iZARDIrekUZAuHGUsbCkinRGIhfMoxtUIbAPD22QlOs6UvKxiwyxvar5QzExPJsaQIrWzot0fDJH8oACDesLJQjWifxZxHT2Zlbonkbg18hem+7uT7vzkUncTGxf9WdN65o7nrHMwIy8OY+jpI1du6Zd+QiTX/sZcV74yj2sL3dJYFAJ7b9904CplqtNkTVIzHoBeWrz2ZNsUPXMTjf6HH0YAst6IPQk4AHCj8rmAmNp2GVDt3ZKuikjzDBVhuKACdz8GVpJydNlG5QPtpPpJ0LelxHSNhOcR7v4ftbUQQz15wj8omsloDXOdYZYErrRznR8nL1ia0tXrXFqxEfY6FjPDdcr9cDJ3Ubl5uOmb1wpgrRYgMWOsqjFAqFJf76L9RG3B49x387+AeDzg3vbwAAAABJRU5ErkJggg==" alt="social"><img class="pl-6" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAK9SURBVHgB1ZnbkaJAFIYPqFU+Oo9WeSOC0QgGI9jJYDSCnYlgMQMzGIxg3QhkI1gzEC/vOo+Wt/0PBQwiIiho81W1jdhYv+3f3adPS5Qgk8mkgaqRy+W4pt1ut0JlFUVRxpQQEt0ARKr5fP4Vly8ozQiPGPv9/i/K8JYfEVs0hJYg9Ccu31FKdD2mJElapVIZUExiiZ7P5yxWo9vE+oktPpLoxWLRPBwOnxTNAtdi4B/slstl81JD+VID7l0IHlG6ghl1u92OZrPZ66WGoaIh+BeqPiVrhzAasMrv6XT6HtborD1swRo9CMwwH/V6vR/0WaBoe8AFPnBn2tVq1fDfPBHNCwQGxITEYAUtLf/gPPE0Go1IHEoYnJ/+m0eibR83SCxU/8B07SGYLfys0ONY+RWOY757GkGORuJSkmW547xxRWN+fCGBgeg395pfsAp1SDwv+2lizKl8YYlGL/+gDIAFx1riHXuolAFgkWeuJTuC+0cZAbPIk7zZbO4VDCVCsVjkmUROO+RMFPj6mT2dqZ7GZvnp4iZARDIrekUZAuHGUsbCkinRGIhfMoxtUIbAPD22QlOs6UvKxiwyxvar5QzExPJsaQIrWzot0fDJH8oACDesLJQjWifxZxHT2Zlbonkbg18hem+7uT7vzkUncTGxf9WdN65o7nrHMwIy8OY+jpI1du6Zd+QiTX/sZcV74yj2sL3dJYFAJ7b9904CplqtNkTVIzHoBeWrz2ZNsUPXMTjf6HH0YAst6IPQk4AHCj8rmAmNp2GVDt3ZKuikjzDBVhuKACdz8GVpJydNlG5QPtpPpJ0LelxHSNhOcR7v4ftbUQQz15wj8omsloDXOdYZYErrRznR8nL1ia0tXrXFqxEfY6FjPDdcr9cDJ3Ubl5uOmb1wpgrRYgMWOsqjFAqFJf76L9RG3B49x387+AeDzg3vbwAAAABJRU5ErkJggg==" alt="social"><img class="pl-6" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAK9SURBVHgB1ZnbkaJAFIYPqFU+Oo9WeSOC0QgGI9jJYDSCnYlgMQMzGIxg3QhkI1gzEC/vOo+Wt/0PBQwiIiho81W1jdhYv+3f3adPS5Qgk8mkgaqRy+W4pt1ut0JlFUVRxpQQEt0ARKr5fP4Vly8ozQiPGPv9/i/K8JYfEVs0hJYg9Ccu31FKdD2mJElapVIZUExiiZ7P5yxWo9vE+oktPpLoxWLRPBwOnxTNAtdi4B/slstl81JD+VID7l0IHlG6ghl1u92OZrPZ66WGoaIh+BeqPiVrhzAasMrv6XT6HtborD1swRo9CMwwH/V6vR/0WaBoe8AFPnBn2tVq1fDfPBHNCwQGxITEYAUtLf/gPPE0Go1IHEoYnJ/+m0eibR83SCxU/8B07SGYLfys0ONY+RWOY757GkGORuJSkmW547xxRWN+fCGBgeg395pfsAp1SDwv+2lizKl8YYlGL/+gDIAFx1riHXuolAFgkWeuJTuC+0cZAbPIk7zZbO4VDCVCsVjkmUROO+RMFPj6mT2dqZ7GZvnp4iZARDIrekUZAuHGUsbCkinRGIhfMoxtUIbAPD22QlOs6UvKxiwyxvar5QzExPJsaQIrWzot0fDJH8oACDesLJQjWifxZxHT2Zlbonkbg18hem+7uT7vzkUncTGxf9WdN65o7nrHMwIy8OY+jpI1du6Zd+QiTX/sZcV74yj2sL3dJYFAJ7b9904CplqtNkTVIzHoBeWrz2ZNsUPXMTjf6HH0YAst6IPQk4AHCj8rmAmNp2GVDt3ZKuikjzDBVhuKACdz8GVpJydNlG5QPtpPpJ0LelxHSNhOcR7v4ftbUQQz15wj8omsloDXOdYZYErrRznR8nL1ia0tXrXFqxEfY6FjPDdcr9cDJ3Ubl5uOmb1wpgrRYgMWOsqjFAqFJf76L9RG3B49x387+AeDzg3vbwAAAABJRU5ErkJggg==" alt="social"><img class="pl-6" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAK9SURBVHgB1ZnbkaJAFIYPqFU+Oo9WeSOC0QgGI9jJYDSCnYlgMQMzGIxg3QhkI1gzEC/vOo+Wt/0PBQwiIiho81W1jdhYv+3f3adPS5Qgk8mkgaqRy+W4pt1ut0JlFUVRxpQQEt0ARKr5fP4Vly8ozQiPGPv9/i/K8JYfEVs0hJYg9Ccu31FKdD2mJElapVIZUExiiZ7P5yxWo9vE+oktPpLoxWLRPBwOnxTNAtdi4B/slstl81JD+VID7l0IHlG6ghl1u92OZrPZ66WGoaIh+BeqPiVrhzAasMrv6XT6HtborD1swRo9CMwwH/V6vR/0WaBoe8AFPnBn2tVq1fDfPBHNCwQGxITEYAUtLf/gPPE0Go1IHEoYnJ/+m0eibR83SCxU/8B07SGYLfys0ONY+RWOY757GkGORuJSkmW547xxRWN+fCGBgeg395pfsAp1SDwv+2lizKl8YYlGL/+gDIAFx1riHXuolAFgkWeuJTuC+0cZAbPIk7zZbO4VDCVCsVjkmUROO+RMFPj6mT2dqZ7GZvnp4iZARDIrekUZAuHGUsbCkinRGIhfMoxtUIbAPD22QlOs6UvKxiwyxvar5QzExPJsaQIrWzot0fDJH8oACDesLJQjWifxZxHT2Zlbonkbg18hem+7uT7vzkUncTGxf9WdN65o7nrHMwIy8OY+jpI1du6Zd+QiTX/sZcV74yj2sL3dJYFAJ7b9904CplqtNkTVIzHoBeWrz2ZNsUPXMTjf6HH0YAst6IPQk4AHCj8rmAmNp2GVDt3ZKuikjzDBVhuKACdz8GVpJydNlG5QPtpPpJ0LelxHSNhOcR7v4ftbUQQz15wj8omsloDXOdYZYErrRznR8nL1ia0tXrXFqxEfY6FjPDdcr9cDJ3Ubl5uOmb1wpgrRYgMWOsqjFAqFJf76L9RG3B49x387+AeDzg3vbwAAAABJRU5ErkJggg==" alt="social"><img class="pl-6" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAK9SURBVHgB1ZnbkaJAFIYPqFU+Oo9WeSOC0QgGI9jJYDSCnYlgMQMzGIxg3QhkI1gzEC/vOo+Wt/0PBQwiIiho81W1jdhYv+3f3adPS5Qgk8mkgaqRy+W4pt1ut0JlFUVRxpQQEt0ARKr5fP4Vly8ozQiPGPv9/i/K8JYfEVs0hJYg9Ccu31FKdD2mJElapVIZUExiiZ7P5yxWo9vE+oktPpLoxWLRPBwOnxTNAtdi4B/slstl81JD+VID7l0IHlG6ghl1u92OZrPZ66WGoaIh+BeqPiVrhzAasMrv6XT6HtborD1swRo9CMwwH/V6vR/0WaBoe8AFPnBn2tVq1fDfPBHNCwQGxITEYAUtLf/gPPE0Go1IHEoYnJ/+m0eibR83SCxU/8B07SGYLfys0ONY+RWOY757GkGORuJSkmW547xxRWN+fCGBgeg395pfsAp1SDwv+2lizKl8YYlGL/+gDIAFx1riHXuolAFgkWeuJTuC+0cZAbPIk7zZbO4VDCVCsVjkmUROO+RMFPj6mT2dqZ7GZvnp4iZARDIrekUZAuHGUsbCkinRGIhfMoxtUIbAPD22QlOs6UvKxiwyxvar5QzExPJsaQIrWzot0fDJH8oACDesLJQjWifxZxHT2Zlbonkbg18hem+7uT7vzkUncTGxf9WdN65o7nrHMwIy8OY+jpI1du6Zd+QiTX/sZcV74yj2sL3dJYFAJ7b9904CplqtNkTVIzHoBeWrz2ZNsUPXMTjf6HH0YAst6IPQk4AHCj8rmAmNp2GVDt3ZKuikjzDBVhuKACdz8GVpJydNlG5QPtpPpJ0LelxHSNhOcR7v4ftbUQQz15wj8omsloDXOdYZYErrRznR8nL1ia0tXrXFqxEfY6FjPDdcr9cDJ3Ubl5uOmb1wpgrRYgMWOsqjFAqFJf76L9RG3B49x387+AeDzg3vbwAAAABJRU5ErkJggg==" alt="social"></div>
+        </div>
         {% endblock %}
     </div>
 

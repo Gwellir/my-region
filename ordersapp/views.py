@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.decorators import login_required
+from django.db import transaction
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView
@@ -10,6 +11,7 @@ from ordersapp.models import Order, OrderItem
 from ordersapp.permissions import OwnsOrIsTravelerOrReadOnly
 from ordersapp.serializers import OrderSerializer
 from travelapp.models import Trip, TripOptionAvailable
+from utils.mail import send_instructor_notification, send_traveler_notification
 
 
 @method_decorator([login_required, traveler_only], name='dispatch')
@@ -42,6 +44,7 @@ class OrderCreate(CreateView):
         form.fields['options_used'].queryset = TripOptionAvailable.objects.filter(trip=form.initial['trip'])
         return form
 
+    @transaction.atomic
     def form_valid(self, form):
         """
         Проверка данных формы (количество людей в группе) и обновление данных похода.
@@ -59,6 +62,9 @@ class OrderCreate(CreateView):
 
         trip.save()
         form_obj.save()
+
+        send_instructor_notification(form_obj)
+        send_traveler_notification(form_obj)
 
         return super(OrderCreate, self).form_valid(form)
 

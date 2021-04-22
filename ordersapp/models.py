@@ -18,7 +18,7 @@ class OrderItem(models.Model):
     adults_amount = models.IntegerField(verbose_name='Взрослых в вашей группе', default=1, null=False)
     kids_amount = models.IntegerField(verbose_name='Детей в вашей группе', default=0, null=False)
     options_used = models.ManyToManyField(TripOptionAvailable, verbose_name='Дополнительные опции')
-    contact_phone = models.CharField(verbose_name='Контактный телефон', max_length=15, null=False)
+    contact_phone = models.CharField(verbose_name='Контактный телефон', max_length=20, null=False)
     contact_email = models.EmailField(verbose_name='Контактный E-mail', blank=False)
     notes = models.TextField(verbose_name='Пожелания', blank=True)
 
