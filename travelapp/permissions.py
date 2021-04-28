@@ -12,7 +12,9 @@ class OwnsOrIsInstructorOrReadOnly(permissions.BasePermission):
             return True
         if isinstance(request.user, AnonymousUser):
             return False
-        if request.method == 'POST':
+        if request.method == "POST":
             return request.user.is_instructor
         else:
-            return request.user.is_instructor and obj.instructor == request.user.instructor
+            return (
+                request.user.is_instructor and obj.instructor == request.user.instructor
+            )

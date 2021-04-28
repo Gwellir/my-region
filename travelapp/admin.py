@@ -1,7 +1,14 @@
 from django.contrib import admin
 
 # Register your models here.
-from travelapp.models import (Route, RoutePhoto, Trip, TripOptionAvailable, Region, District)
+from travelapp.models import (
+    District,
+    Region,
+    Route,
+    RoutePhoto,
+    Trip,
+    TripOptionAvailable,
+)
 
 admin.site.register(Route)
 admin.site.register(RoutePhoto)

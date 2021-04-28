@@ -11,13 +11,13 @@ def main(request):
     Филлер главной страницы.
     """
 
-    title = 'Travel Freely!'
+    title = "Travel Freely!"
 
     content = {
-        'title': title,
-        'route_list': Route.objects.filter(is_active=True),
-        'comment_list': TripComment.objects.filter(is_allowed=True, is_active=True),
-        'form': RouteFilterForm(),
+        "title": title,
+        "route_list": Route.objects.filter(is_active=True),
+        "comment_list": TripComment.objects.filter(is_allowed=True, is_active=True),
+        "form": RouteFilterForm(),
     }
 
-    return render(request, 'mainsite/index.html', context=content)
+    return render(request, "mainsite/index.html", context=content)

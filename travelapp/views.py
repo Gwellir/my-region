@@ -1,15 +1,16 @@
 from django.db import transaction
-from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, DetailView, CreateView
-from rest_framework import viewsets, permissions
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, DetailView, ListView
+from rest_framework import permissions, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from travelapp.models import Route, Trip, RoutePhoto
+from travelapp.models import Route, RoutePhoto, Trip
+
 from .filters import TripFilter
-from .forms import RouteFilterForm, RouteCreateForm
-from .serializers import RouteSerializer, RouteRetrieveSerializer, TripSerializer
+from .forms import RouteCreateForm, RouteFilterForm
 from .permissions import OwnsOrIsInstructorOrReadOnly
+from .serializers import RouteRetrieveSerializer, RouteSerializer, TripSerializer
 
 
 class RouteList(ListView):
@@ -18,8 +19,8 @@ class RouteList(ListView):
     def get_context_data(self, **kwargs):
         data = super(RouteList, self).get_context_data(**kwargs)
         form = RouteFilterForm()
-        data['form'] = form
-        data['title'] = 'Список маршрутов'
+        data["form"] = form
+        data["title"] = "Список маршрутов"
 
         return data
 
@@ -33,15 +34,15 @@ class RouteList(ListView):
 
 class TripSelectorList(ListView):
     model = Trip
-    template_name = 'travelapp/trip_selector.html'
-    context_object_name = 'trip_list'
+    template_name = "travelapp/trip_selector.html"
+    context_object_name = "trip_list"
 
     def get_context_data(self, **kwargs):
         data = super(TripSelectorList, self).get_context_data(**kwargs)
         form = RouteFilterForm()
-        data['title'] = 'Выбрать поход'
-        data['form'] = form
-        data['route_list'] = Route.objects.all()[:6]
+        data["title"] = "Выбрать поход"
+        data["form"] = form
+        data["route_list"] = Route.objects.all()[:6]
 
         return data
 
@@ -59,12 +60,12 @@ class RouteDetail(DetailView):
 class RouteCreateView(CreateView):
     model = Route
     form_class = RouteCreateForm
-    success_url = reverse_lazy('travelapp:route_list')
+    success_url = reverse_lazy("travelapp:route_list")
 
     def form_valid(self, form):
-        files = self.request.FILES.getlist('photos')
+        files = self.request.FILES.getlist("photos")
         form.instance.instructor = self.request.user.instructor
-        form.cleaned_data.pop('photos')
+        form.cleaned_data.pop("photos")
         with transaction.atomic():
             result = super(RouteCreateView, self).form_valid(form)
             for photo in files:
@@ -84,7 +85,7 @@ class RouteViewSet(viewsets.ModelViewSet):
 
     queryset = Route.objects.filter(is_active=True, is_checked=True)
     serializer_classes = {
-        'retrieve': RouteRetrieveSerializer,
+        "retrieve": RouteRetrieveSerializer,
     }
     default_serializer_class = RouteSerializer
     permission_classes = [OwnsOrIsInstructorOrReadOnly]
@@ -117,8 +118,10 @@ class TripViewSet(viewsets.ModelViewSet):
         serializer.save(instructor=self.request.user.instructor)
 
 
-@api_view(['GET'])
+@api_view(["GET"])
 def api_root(request, format=None):
-    return Response({
-        'routes': reverse('route-list', request=request, format=format),
-    })
+    return Response(
+        {
+            "routes": reverse("route-list", request=request, format=format),
+        }
+    )
