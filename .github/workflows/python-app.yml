@@ -34,9 +34,10 @@ jobs:
     - name: Check imports with isort
       run: |
         isort . --check
-    - name: Run Django migrations
+    - name: Run Django migrations and collectstatic
       run: |
         python manage.py migrate
+        python manage.py collectstatic
       env:
         DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
     - name: Run Tests with PyTest
