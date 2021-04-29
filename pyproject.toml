@@ -10,3 +10,12 @@ use_parentheses = true
 ensure_newline_before_comments = true
 line_length = 88
 extend_skip = 'migrations'
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+python_files = "tests.py test_*.py *_tests.py"
+DJANGO_SETTINGS_MODULE = "my_region.settings"
+filterwarnings = [
+    'ignore:.*is deprecated in favor of.*:',
+]

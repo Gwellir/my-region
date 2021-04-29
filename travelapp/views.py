@@ -1,7 +1,7 @@
 from django.db import transaction
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView
-from rest_framework import permissions, viewsets
+from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 

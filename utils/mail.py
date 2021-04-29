@@ -31,8 +31,7 @@ def send_verify_mail(user):
 def send_traveler_notification(order: OrderItem) -> bool:
     route = order.trip.route
     instructor = order.trip.instructor
-    usermail = order.traveler.user.email
-    title = f"Уведомление о бронировании мест в походе (Мой Край)"
+    title = "Уведомление о бронировании мест в походе (Мой Край)"
     message = (
         f"С вашего аккаунта на сервисе Мой Край были забронированы места в походе"
         f' по маршруту "{route.name}".\n\n'
@@ -59,7 +58,7 @@ def send_instructor_notification(order: OrderItem) -> bool:
     route = order.trip.route
     user = order.traveler.user
     instructor = order.trip.instructor
-    title = f"Уведомление о бронировании мест в походе (Мой Край)"
+    title = "Уведомление о бронировании мест в походе (Мой Край)"
     message = (
         f"На сервисе Мой Край были забронированы места в Вашем походе"
         f' по маршруту "{route.name}".\n\n'
