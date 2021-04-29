@@ -99,7 +99,8 @@ class RegisterSerializer(serializers.ModelSerializer):
             profile.home_region = self.validated_data.get("home_region")
         profile.save()
 
-        # todo try to understand how actions should be spread between logic layers, maybe send mail in post_save receiver?
+        # todo try to understand how actions should be spread between logic layers,
+        #  maybe send mail in post_save receiver?
         send_verify_mail(user)
 
         return user

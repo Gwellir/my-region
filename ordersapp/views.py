@@ -7,7 +7,7 @@ from django.views.generic import CreateView
 from rest_framework import viewsets
 
 from authapp.decorators import traveler_only
-from ordersapp.models import Order, OrderItem
+from ordersapp.models import OrderItem
 from ordersapp.permissions import OwnsOrIsTravelerOrReadOnly
 from ordersapp.serializers import OrderSerializer
 from travelapp.models import Trip, TripOptionAvailable

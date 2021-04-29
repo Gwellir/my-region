@@ -1,6 +1,3 @@
-from enum import Enum
-
-
 # IMAGE SIZES
 class RoutePhotoSizes:
     # for storage

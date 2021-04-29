@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView
 from rest_framework import viewsets
 
 from authapp.decorators import traveler_only

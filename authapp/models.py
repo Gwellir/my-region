@@ -31,7 +31,7 @@ def get_expiry_datetime():
 
 def email_is_lowercase(mail):
     if not isinstance(mail, str) or mail != mail.lower():
-        raise ValidationError(_(f"Укажите адрес почты в нижнем регистре!"))
+        raise ValidationError(_("Укажите адрес почты в нижнем регистре!"))
 
 
 class AppUser(AbstractUser):
@@ -155,7 +155,6 @@ class Instructor(models.Model):
         verbose_name="Место проживания", max_length=100, blank=True, null=True
     )
     trips_run = models.IntegerField(verbose_name="Пройдено маршрутов", default=0)
-    # subscribers = models.ManyToManyField(Traveler, verbose_name='Подписчики', blank=True, related_name='subscribed_to')
 
     def __str__(self):
         return f"{self.user.get_full_name()} ({self.home_region})"
