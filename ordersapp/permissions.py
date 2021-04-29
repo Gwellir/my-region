@@ -12,7 +12,7 @@ class OwnsOrIsTravelerOrReadOnly(permissions.BasePermission):
             return False
         if request.method in permissions.SAFE_METHODS:
             return True
-        if request.method == 'POST':
+        if request.method == "POST":
             return request.user.is_traveler
         else:
             return request.user.is_traveler and obj.traveler == request.user.traveler
