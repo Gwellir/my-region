@@ -175,7 +175,8 @@ class Route(models.Model):
 
     def __str__(self):
         return (
-            f'Маршрут "{self.name}"\n{self.location} ({self.route_type}, {self.length:.1f}км, {self.duration}ч)\n'
+            f'Маршрут "{self.name}"\n{self.location} ({self.route_type},'
+            f' {self.length:.1f}км, {self.duration}ч)\n'
             f"Сложность: {self.complexity}"
         )
 
@@ -272,7 +273,8 @@ class Options(models.IntegerChoices):
 
 class TripOptionAvailable(models.Model):
     """
-    Модель описывает опции, которые организатор похода объявил доступными для этого похода.
+    Модель описывает опции,
+     которые организатор похода объявил доступными для этого похода.
     """
 
     trip = models.ManyToManyField(
