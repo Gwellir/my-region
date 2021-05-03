@@ -42,7 +42,8 @@ def send_traveler_notification(order: OrderItem) -> bool:
         f"Инструктор: {instructor.user.get_full_name()}\n"
         f"Стоимость: {order.trip.get_cost()}"
         f"Места: {order.adults_amount} взрослых, {order.kids_amount} детей\n\n"
-        f"Связь с инструктором:\n почта: {instructor.user.email}, телефон: {instructor.user.phone}"
+        f"Связь с инструктором:\n"
+        f" почта: {instructor.user.email}, телефон: {instructor.user.phone}"
     )
 
     return send_mail(
@@ -67,7 +68,8 @@ def send_instructor_notification(order: OrderItem) -> bool:
         f"Пользователь: {user.get_full_name()}\n"
         f"Места: {order.adults_amount} взрослых, {order.kids_amount} детей\n\n"
         f'Комментарий: "{order.notes}"\n'
-        f"Связь с пользователем:\n почта: {order.contact_email}, телефон: {order.contact_phone}"
+        f"Связь с пользователем:\n"
+        f" почта: {order.contact_email}, телефон: {order.contact_phone}"
     )
 
     return send_mail(
