@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.utils.translation import gettext as _
 
 # Create your views here.
 from socialapp.models import TripComment
@@ -11,7 +12,7 @@ def main(request):
     Филлер главной страницы.
     """
 
-    title = "Travel Freely!"
+    title = _("Main page title")
 
     content = {
         "title": title,

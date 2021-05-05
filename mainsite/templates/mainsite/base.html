@@ -1,6 +1,7 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>
@@ -40,28 +41,28 @@
             <div class="flex flex-col">
                 <div class="flex items-center pb-5">
                     <img class="h-16" src="/static/icons/MainLogo.png" alt="mainLogo" />
-                    <span class="font-arkhip text-logoSize tracking-widest">мой край</span>
+                    <span class="font-arkhip text-logoSize tracking-widest">{% translate "my region" %}</span>
                 </div>
-                <span class="w-64 font-jost text-addressSize pb-1">г.Москва, ул.Родионова 13, офис 156</span>
+                <span class="w-64 font-jost text-addressSize pb-1">{% translate "Moscow, Rodionova str., 13-156" %}</span>
                 <span class="font-jost text-telSize">+7 (982) 234 45 28</span>
             </div>
             <div class="flex flex-col mt-3.5">
-                <span class="font-jost text-addressSize font-medium pb-2">Ссылки</span>
-                <span class="font-jost text-addressSize pb-2">Маршруты</span>
-                <span class="font-jost text-addressSize pb-2">Обучение</span>
-                <span class="font-jost text-addressSize pb-2">Личный кабинет</span>
+                <span class="font-jost text-addressSize font-medium pb-2">{% translate "Links" %}</span>
+                <span class="font-jost text-addressSize pb-2">{% translate "Routes" %}</span>
+                <span class="font-jost text-addressSize pb-2">{% translate "Education" %}</span>
+                <span class="font-jost text-addressSize pb-2">{% translate "User Account" %}</span>
             </div>
             <div class="flex flex-col mt-3.5">
-                <span class="font-jost text-addressSize font-medium pb-2">Организациям</span>
-                <span class="font-jost text-addressSize pb-2">ООПТ</span>
-                <span class="font-jost text-addressSize pb-2">Тарифы</span>
-                <span class="font-jost text-addressSize pb-2">Сотрудничество</span>
+                <span class="font-jost text-addressSize font-medium pb-2">{% translate "For organizations" %}</span>
+                <span class="font-jost text-addressSize pb-2">{% translate "SPNA" %}</span>
+                <span class="font-jost text-addressSize pb-2">{% translate "Tariffs" %}</span>
+                <span class="font-jost text-addressSize pb-2">{% translate "Cooperation" %}</span>
             </div>
             <div class="flex flex-col mt-3.5">
-                <span class="font-jost text-addressSize font-medium pb-2">Обратная связь</span>
-                <span class="font-jost text-addressSize pb-2">Вакансии</span>
-                <span class="font-jost text-addressSize pb-2">Контакты</span>
-                <span class="font-jost text-addressSize pb-2">Обратная связь</span>
+                <span class="font-jost text-addressSize font-medium pb-2">{% translate "Feedback" %}</span>
+                <span class="font-jost text-addressSize pb-2">{% translate "Vacancies" %}</span>
+                <span class="font-jost text-addressSize pb-2">{% translate "Contacts" %}</span>
+                <span class="font-jost text-addressSize pb-2">{% translate "Provide feedback" %}</span>
             </div>
             </div>
                <div class="flex pb-44 justify-center"><img class="pl-6" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAK9SURBVHgB1ZnbkaJAFIYPqFU+Oo9WeSOC0QgGI9jJYDSCnYlgMQMzGIxg3QhkI1gzEC/vOo+Wt/0PBQwiIiho81W1jdhYv+3f3adPS5Qgk8mkgaqRy+W4pt1ut0JlFUVRxpQQEt0ARKr5fP4Vly8ozQiPGPv9/i/K8JYfEVs0hJYg9Ccu31FKdD2mJElapVIZUExiiZ7P5yxWo9vE+oktPpLoxWLRPBwOnxTNAtdi4B/slstl81JD+VID7l0IHlG6ghl1u92OZrPZ66WGoaIh+BeqPiVrhzAasMrv6XT6HtborD1swRo9CMwwH/V6vR/0WaBoe8AFPnBn2tVq1fDfPBHNCwQGxITEYAUtLf/gPPE0Go1IHEoYnJ/+m0eibR83SCxU/8B07SGYLfys0ONY+RWOY757GkGORuJSkmW547xxRWN+fCGBgeg395pfsAp1SDwv+2lizKl8YYlGL/+gDIAFx1riHXuolAFgkWeuJTuC+0cZAbPIk7zZbO4VDCVCsVjkmUROO+RMFPj6mT2dqZ7GZvnp4iZARDIrekUZAuHGUsbCkinRGIhfMoxtUIbAPD22QlOs6UvKxiwyxvar5QzExPJsaQIrWzot0fDJH8oACDesLJQjWifxZxHT2Zlbonkbg18hem+7uT7vzkUncTGxf9WdN65o7nrHMwIy8OY+jpI1du6Zd+QiTX/sZcV74yj2sL3dJYFAJ7b9904CplqtNkTVIzHoBeWrz2ZNsUPXMTjf6HH0YAst6IPQk4AHCj8rmAmNp2GVDt3ZKuikjzDBVhuKACdz8GVpJydNlG5QPtpPpJ0LelxHSNhOcR7v4ftbUQQz15wj8omsloDXOdYZYErrRznR8nL1ia0tXrXFqxEfY6FjPDdcr9cDJ3Ubl5uOmb1wpgrRYgMWOsqjFAqFJf76L9RG3B49x387+AeDzg3vbwAAAABJRU5ErkJggg==" alt="social"><img class="pl-6" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAK9SURBVHgB1ZnbkaJAFIYPqFU+Oo9WeSOC0QgGI9jJYDSCnYlgMQMzGIxg3QhkI1gzEC/vOo+Wt/0PBQwiIiho81W1jdhYv+3f3adPS5Qgk8mkgaqRy+W4pt1ut0JlFUVRxpQQEt0ARKr5fP4Vly8ozQiPGPv9/i/K8JYfEVs0hJYg9Ccu31FKdD2mJElapVIZUExiiZ7P5yxWo9vE+oktPpLoxWLRPBwOnxTNAtdi4B/slstl81JD+VID7l0IHlG6ghl1u92OZrPZ66WGoaIh+BeqPiVrhzAasMrv6XT6HtborD1swRo9CMwwH/V6vR/0WaBoe8AFPnBn2tVq1fDfPBHNCwQGxITEYAUtLf/gPPE0Go1IHEoYnJ/+m0eibR83SCxU/8B07SGYLfys0ONY+RWOY757GkGORuJSkmW547xxRWN+fCGBgeg395pfsAp1SDwv+2lizKl8YYlGL/+gDIAFx1riHXuolAFgkWeuJTuC+0cZAbPIk7zZbO4VDCVCsVjkmUROO+RMFPj6mT2dqZ7GZvnp4iZARDIrekUZAuHGUsbCkinRGIhfMoxtUIbAPD22QlOs6UvKxiwyxvar5QzExPJsaQIrWzot0fDJH8oACDesLJQjWifxZxHT2Zlbonkbg18hem+7uT7vzkUncTGxf9WdN65o7nrHMwIy8OY+jpI1du6Zd+QiTX/sZcV74yj2sL3dJYFAJ7b9904CplqtNkTVIzHoBeWrz2ZNsUPXMTjf6HH0YAst6IPQk4AHCj8rmAmNp2GVDt3ZKuikjzDBVhuKACdz8GVpJydNlG5QPtpPpJ0LelxHSNhOcR7v4ftbUQQz15wj8omsloDXOdYZYErrRznR8nL1ia0tXrXFqxEfY6FjPDdcr9cDJ3Ubl5uOmb1wpgrRYgMWOsqjFAqFJf76L9RG3B49x387+AeDzg3vbwAAAABJRU5ErkJggg==" alt="social"><img class="pl-6" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAK9SURBVHgB1ZnbkaJAFIYPqFU+Oo9WeSOC0QgGI9jJYDSCnYlgMQMzGIxg3QhkI1gzEC/vOo+Wt/0PBQwiIiho81W1jdhYv+3f3adPS5Qgk8mkgaqRy+W4pt1ut0JlFUVRxpQQEt0ARKr5fP4Vly8ozQiPGPv9/i/K8JYfEVs0hJYg9Ccu31FKdD2mJElapVIZUExiiZ7P5yxWo9vE+oktPpLoxWLRPBwOnxTNAtdi4B/slstl81JD+VID7l0IHlG6ghl1u92OZrPZ66WGoaIh+BeqPiVrhzAasMrv6XT6HtborD1swRo9CMwwH/V6vR/0WaBoe8AFPnBn2tVq1fDfPBHNCwQGxITEYAUtLf/gPPE0Go1IHEoYnJ/+m0eibR83SCxU/8B07SGYLfys0ONY+RWOY757GkGORuJSkmW547xxRWN+fCGBgeg395pfsAp1SDwv+2lizKl8YYlGL/+gDIAFx1riHXuolAFgkWeuJTuC+0cZAbPIk7zZbO4VDCVCsVjkmUROO+RMFPj6mT2dqZ7GZvnp4iZARDIrekUZAuHGUsbCkinRGIhfMoxtUIbAPD22QlOs6UvKxiwyxvar5QzExPJsaQIrWzot0fDJH8oACDesLJQjWifxZxHT2Zlbonkbg18hem+7uT7vzkUncTGxf9WdN65o7nrHMwIy8OY+jpI1du6Zd+QiTX/sZcV74yj2sL3dJYFAJ7b9904CplqtNkTVIzHoBeWrz2ZNsUPXMTjf6HH0YAst6IPQk4AHCj8rmAmNp2GVDt3ZKuikjzDBVhuKACdz8GVpJydNlG5QPtpPpJ0LelxHSNhOcR7v4ftbUQQz15wj8omsloDXOdYZYErrRznR8nL1ia0tXrXFqxEfY6FjPDdcr9cDJ3Ubl5uOmb1wpgrRYgMWOsqjFAqFJf76L9RG3B49x387+AeDzg3vbwAAAABJRU5ErkJggg==" alt="social"><img class="pl-6" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAK9SURBVHgB1ZnbkaJAFIYPqFU+Oo9WeSOC0QgGI9jJYDSCnYlgMQMzGIxg3QhkI1gzEC/vOo+Wt/0PBQwiIiho81W1jdhYv+3f3adPS5Qgk8mkgaqRy+W4pt1ut0JlFUVRxpQQEt0ARKr5fP4Vly8ozQiPGPv9/i/K8JYfEVs0hJYg9Ccu31FKdD2mJElapVIZUExiiZ7P5yxWo9vE+oktPpLoxWLRPBwOnxTNAtdi4B/slstl81JD+VID7l0IHlG6ghl1u92OZrPZ66WGoaIh+BeqPiVrhzAasMrv6XT6HtborD1swRo9CMwwH/V6vR/0WaBoe8AFPnBn2tVq1fDfPBHNCwQGxITEYAUtLf/gPPE0Go1IHEoYnJ/+m0eibR83SCxU/8B07SGYLfys0ONY+RWOY757GkGORuJSkmW547xxRWN+fCGBgeg395pfsAp1SDwv+2lizKl8YYlGL/+gDIAFx1riHXuolAFgkWeuJTuC+0cZAbPIk7zZbO4VDCVCsVjkmUROO+RMFPj6mT2dqZ7GZvnp4iZARDIrekUZAuHGUsbCkinRGIhfMoxtUIbAPD22QlOs6UvKxiwyxvar5QzExPJsaQIrWzot0fDJH8oACDesLJQjWifxZxHT2Zlbonkbg18hem+7uT7vzkUncTGxf9WdN65o7nrHMwIy8OY+jpI1du6Zd+QiTX/sZcV74yj2sL3dJYFAJ7b9904CplqtNkTVIzHoBeWrz2ZNsUPXMTjf6HH0YAst6IPQk4AHCj8rmAmNp2GVDt3ZKuikjzDBVhuKACdz8GVpJydNlG5QPtpPpJ0LelxHSNhOcR7v4ftbUQQz15wj8omsloDXOdYZYErrRznR8nL1ia0tXrXFqxEfY6FjPDdcr9cDJ3Ubl5uOmb1wpgrRYgMWOsqjFAqFJf76L9RG3B49x387+AeDzg3vbwAAAABJRU5ErkJggg==" alt="social"><img class="pl-6" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAK9SURBVHgB1ZnbkaJAFIYPqFU+Oo9WeSOC0QgGI9jJYDSCnYlgMQMzGIxg3QhkI1gzEC/vOo+Wt/0PBQwiIiho81W1jdhYv+3f3adPS5Qgk8mkgaqRy+W4pt1ut0JlFUVRxpQQEt0ARKr5fP4Vly8ozQiPGPv9/i/K8JYfEVs0hJYg9Ccu31FKdD2mJElapVIZUExiiZ7P5yxWo9vE+oktPpLoxWLRPBwOnxTNAtdi4B/slstl81JD+VID7l0IHlG6ghl1u92OZrPZ66WGoaIh+BeqPiVrhzAasMrv6XT6HtborD1swRo9CMwwH/V6vR/0WaBoe8AFPnBn2tVq1fDfPBHNCwQGxITEYAUtLf/gPPE0Go1IHEoYnJ/+m0eibR83SCxU/8B07SGYLfys0ONY+RWOY757GkGORuJSkmW547xxRWN+fCGBgeg395pfsAp1SDwv+2lizKl8YYlGL/+gDIAFx1riHXuolAFgkWeuJTuC+0cZAbPIk7zZbO4VDCVCsVjkmUROO+RMFPj6mT2dqZ7GZvnp4iZARDIrekUZAuHGUsbCkinRGIhfMoxtUIbAPD22QlOs6UvKxiwyxvar5QzExPJsaQIrWzot0fDJH8oACDesLJQjWifxZxHT2Zlbonkbg18hem+7uT7vzkUncTGxf9WdN65o7nrHMwIy8OY+jpI1du6Zd+QiTX/sZcV74yj2sL3dJYFAJ7b9904CplqtNkTVIzHoBeWrz2ZNsUPXMTjf6HH0YAst6IPQk4AHCj8rmAmNp2GVDt3ZKuikjzDBVhuKACdz8GVpJydNlG5QPtpPpJ0LelxHSNhOcR7v4ftbUQQz15wj8omsloDXOdYZYErrRznR8nL1ia0tXrXFqxEfY6FjPDdcr9cDJ3Ubl5uOmb1wpgrRYgMWOsqjFAqFJf76L9RG3B49x387+AeDzg3vbwAAAABJRU5ErkJggg==" alt="social"></div>
