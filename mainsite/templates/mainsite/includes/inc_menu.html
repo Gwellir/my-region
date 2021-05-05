@@ -1,21 +1,22 @@
+{% load i18n %}
 <header class="flex items-center justify-around w-auto h-28 bg-primary">
   <a href="/">
     <div class="flex items-center px-2 cursor-pointer">
       <img src="/static/icons/MainLogo.png" class="h-20 " alt="mainLogo" />
       <div class="flex flex-col">
         <span class="text-textBlack text-logoSize font-arkhip py-1 tracking-widest">
-          мой край
+          {% translate "my region" %}
         </span>
         <span class="text-textBlack font-arkhip font-normal text-sm">
-          Сервис путешествий по России
+          {% translate "Service for traveling around Russia" %}
         </span>
       </div>
     </div>
   </a>
   <div class="flex-row justify-center w-1/3">
-    <a href="/" class="px-6 font-jost text-black hover:text-gray-400 cursor-pointer">Главная</a>
-    <span class="px-6 font-jost text-gray-400 hover:text-black cursor-pointer">Расписание</span>
-    <span class="px-6 font-jost text-gray-400 hover:text-black cursor-pointer">Путешествeнникам</span>
+    <a href="/" class="px-6 font-jost text-black hover:text-gray-400 cursor-pointer">{% translate "Main" %}</a>
+    <span class="px-6 font-jost text-gray-400 hover:text-black cursor-pointer">{% translate "Schedule" %}</span>
+    <span class="px-6 font-jost text-gray-400 hover:text-black cursor-pointer">{% translate "For travelers" %}</span>
   </div>
   <div class="flex">
     {% if user.is_authenticated %}
@@ -25,10 +26,10 @@
         {% else %}
             {% url 'userapp:instructor_profile' %}
         {% endif %}">{{ user.first_name|default:'User' }}</a>
-        <a class="nav-link px-2 text-gray-400 font-jost focus:outline-none" href="{% url 'auth:logout' %}">Выйти</a>
+        <a class="nav-link px-2 text-gray-400 font-jost focus:outline-none" href="{% url 'auth:logout' %}">{% translate "Log out" %}</a>
     {% else %}
-      <a href="{% url 'authapp:register' %}" class="px-5 text-gray-400 font-jost focus:outline-none">Регистрация</a>
-      <a href="{% url 'authapp:login' %}" class="px-5 text-gray-400 font-jost focus:outline-none">Войти</a>
+      <a href="{% url 'authapp:register' %}" class="px-5 text-gray-400 font-jost focus:outline-none">{% translate "Registration" %}</a>
+      <a href="{% url 'authapp:login' %}" class="px-5 text-gray-400 font-jost focus:outline-none">{% translate "Log in" %}</a>
       <a href="{% url 'authapp:login' %}"><img class="cursor-pointer" src="/static/icons/people.png" alt="people" /></a>
     {% endif %}
   </div>
