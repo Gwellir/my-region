@@ -7,14 +7,15 @@ class OwnsOrIsInstructorOrReadOnly(permissions.BasePermission):
     Класс permissions, который разрешает редактировать объекты только Гидам.
     """
 
-    def has_object_permission(self, request, view, obj):
+    def has_permission(self, request, view):
         if request.method in permissions.SAFE_METHODS:
             return True
         if isinstance(request.user, AnonymousUser):
             return False
         if request.method == "POST":
             return request.user.is_instructor
-        else:
-            return (
-                request.user.is_instructor and obj.instructor == request.user.instructor
-            )
+
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return request.user.is_instructor and obj.instructor == request.user.instructor
