@@ -10,7 +10,8 @@ from rest_framework.permissions import AllowAny
 
 from authapp.forms import SignupForm, UserLoginForm
 from authapp.models import AppUser
-from authapp.serializers import RegisterSerializer
+from authapp.permissions import IsOwner
+from authapp.serializers import UserProfileSerializer
 from utils.mail import send_verify_mail
 
 
@@ -118,7 +119,16 @@ def verify(request, email, activation_key):
 
 
 # API
-class APIRegisterView(generics.CreateAPIView):
+class APIUserRegisterView(generics.CreateAPIView):
     queryset = AppUser.objects.all()
     permission_classes = [AllowAny]
-    serializer_class = RegisterSerializer
+    serializer_class = UserProfileSerializer
+
+
+class APIUserEditView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = AppUser.objects.all()
+    permission_classes = [IsOwner]
+    serializer_class = UserProfileSerializer
+
+    def get_object(self):
+        return self.request.user
