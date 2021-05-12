@@ -15,6 +15,4 @@ class OwnsOrIsInstructorOrReadOnly(permissions.BasePermission):
             return request.user.is_instructor
 
     def has_object_permission(self, request, view, obj):
-        if request.method in permissions.SAFE_METHODS:
-            return True
         return request.user.is_instructor and obj.instructor == request.user.instructor
