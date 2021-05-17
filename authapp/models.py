@@ -46,7 +46,7 @@ class AppUser(AbstractUser):
         upload_to="media/user_pics",
         blank=True,
         null=True,
-        processors=processors.ResizeToFit(UpicSizes.WIDTH, UpicSizes.HEIGHT),
+        processors=[processors.ResizeToFit(UpicSizes.WIDTH, UpicSizes.HEIGHT)],
         format="JPEG",
         options={"quality": 60},
     )
