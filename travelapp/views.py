@@ -107,13 +107,6 @@ class TripViewSet(viewsets.ModelViewSet):
     permission_classes = [OwnsOrIsInstructorOrReadOnly]
     filterset_class = TripFilter
 
-    # def get_permissions(self):
-    #     if self.action in ['create', 'update', 'partial_update', 'destroy']:
-    #         permission_classes = [IsInstructorOrReadOnly]
-    #     else:
-    #         permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    #     return [permission() for permission in permission_classes]
-
     def perform_create(self, serializer):
         serializer.save(instructor=self.request.user.instructor)
 

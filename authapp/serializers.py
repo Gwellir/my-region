@@ -15,7 +15,7 @@ UserModel = get_user_model()
 
 
 # todo protect with CAPTCHA or throttling
-class RegisterSerializer(serializers.ModelSerializer):
+class UserProfileSerializer(serializers.ModelSerializer):
     """
     Сериализатор для процесса регистрации пользователей.
     """
@@ -52,24 +52,39 @@ class RegisterSerializer(serializers.ModelSerializer):
         }
 
     def validate(self, attrs):
-        if attrs["password"] != attrs["password2"]:
+        if attrs.get("password", None) != attrs.get("password2", None):
             raise serializers.ValidationError({"password": "Пароли не совпадают!"})
-        dob = attrs["date_of_birth"]
-        delta = (
-            now().year - dob.year - ((now().month, now().day) < (dob.month, dob.day))
-        )
-        if delta < 18:
-            raise serializers.ValidationError(
-                {"date_of_birth": "Возраст должен быть более 18 лет."}
+        dob = attrs.get("date_of_birth", None)
+        if dob:
+            delta = (
+                now().year
+                - dob.year
+                - ((now().month, now().day) < (dob.month, dob.day))
             )
+            if delta < 18:
+                raise serializers.ValidationError(
+                    {"date_of_birth": "Возраст должен быть более 18 лет."}
+                )
 
         return attrs
+
+    @transaction.atomic
+    def update(self, instance, validated_data):
+        # todo придумать как менять основополагающее поле e-mail
+        # todo выглядит как костыль...
+        validated_data.pop("is_instructor")
+        pw = validated_data.pop("password", None)
+        if pw:
+            instance.set_password(pw)
+        super().update(instance, validated_data)
+        return instance
 
     @transaction.atomic
     def create(self, validated_data):
         user = AppUser.objects.create_user(
             username=validated_data["username"],
             email=validated_data["email"],
+            phone=validated_data["phone"],
             date_of_birth=validated_data["date_of_birth"],
             first_name=validated_data["first_name"],
             last_name=validated_data["last_name"],

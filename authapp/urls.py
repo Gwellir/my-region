@@ -10,7 +10,8 @@ urlpatterns = [
     path("", include("django.contrib.auth.urls")),
     # path('edit/', authapp.edit, name='edit'),
     path("signup/", authapp.RegisterView.as_view(), name="register"),
-    path("signup_api/", authapp.APIRegisterView.as_view(), name="api_register"),
+    path("signup_api/", authapp.APIUserRegisterView.as_view(), name="api_register"),
+    path("edit_api/", authapp.APIUserEditView.as_view(), name="api_user_edit"),
     path(
         "signup/traveler/", authapp.TravelerSignupView.as_view(), name="signup_traveler"
     ),
